@@ -11,3 +11,6 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
 }
+body {
+  font-family: 'Figtree Variable', sans-serif;
+}
