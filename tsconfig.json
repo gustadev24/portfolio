@@ -20,13 +20,17 @@
       "@lib/*": [
         "src/lib/*"
       ],
-      "@types/*": [
+      "@types": [
         "src/types.d.ts"
       ],
       "@styles/*": [
         "src/styles/*"
       ]
-
-    }
+    },
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
   }
 }
