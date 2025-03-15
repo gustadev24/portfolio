@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
-import { ALL_LOCALES, DEFAULT_LOCALE } from 'src/config/locales';
+import { ALL_LOCALES, DEFAULT_LOCALE } from './src/config/locales';
 
 // https://astro.build/config
 export default defineConfig({
