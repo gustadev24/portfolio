@@ -1,13 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #07011B;
-  --primary-foreground: #FCFEC5;
-  --secondary: #2C2B39;
+  --primary: #F0EDFF;
+  --primary-foreground: #070975;
+  --secondary: #19284c33;
+  --secondary-foreground: #19284C;
+  --tertiary: #002BFF;
+  --accent: #D85301;
+  --muted: #5E80F0;
+  --navbar: #ECEFF8;
+  --button: #A3B5FF;
+  --button-foreground: #082863;
+  --button-hover: #fdb248b7;
+  /* --background: radial-gradient(circle at top, var(--primary) 0, var(--secondary) 20%); */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #020932;
+    --primary-foreground: #FFD62C;
+    --secondary: #012754;
+    --secondary-foreground: #FDF8EB;
+    --tertiary: #395DFF;
+    --accent: #EA780E;
+    --muted: #578AB1;
+    --navbar: #1E1E2E;
+    --button: #02183A;
+    --button-foreground: #95B2DC;
+    --button-hover: #492c0359;
+  }
 }
 
 @theme {
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
+  --color-secondary-foreground: #19284C;
+  --color-tertiary: #002BFF;
+  --color-accent: #D85301;
+  --color-muted: #5E80F0;
+  --color-navbar: #ECEFF8;
+  --color-button: #A3B5FF;
+  --color-button-foreground: #082863;
+  --color-button-hover: #fdb248b7;
+  /* --background: radial-gradient(circle at top, var(--primary) 0, var(--secondary) 20%); */
 }
