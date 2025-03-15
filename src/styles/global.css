@@ -35,13 +35,14 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
-  --color-secondary-foreground: #19284C;
-  --color-tertiary: #002BFF;
-  --color-accent: #D85301;
-  --color-muted: #5E80F0;
-  --color-navbar: #ECEFF8;
-  --color-button: #A3B5FF;
-  --color-button-foreground: #082863;
-  --color-button-hover: #fdb248b7;
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-tertiary: var(--tertiary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-navbar: var(--navbar);
+  --color-button: var(--button);
+  --color-button-foreground: var(--button-foreground);
+  --color-button-hover: var(--button-hover);
+  --shadow-nav: 0 0 20px 0 rgba(0, 0, 0, 0.3);
   /* --background: radial-gradient(circle at top, var(--primary) 0, var(--secondary) 20%); */
 }
