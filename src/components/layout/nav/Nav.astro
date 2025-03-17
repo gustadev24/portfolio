@@ -3,19 +3,49 @@ import NavItem from "./NavItem.astro";
 import CodeIcon from "@icons/code.svg";
 import StackIcon from "@icons/stack.svg";
 import PersonIcon from "@icons/person.svg";
+import pagesConfig from "src/config/pages";
+import { RootSections } from "src/config/pages";
+
+const page = pagesConfig.pages
+.find(({ path }) => path === "/");
+
+const navItems = page?.sections?.map(({ name, id }) => {
+        let iconSection: { component: typeof CodeIcon, class: string };
+        switch(id) {
+          case RootSections.ABOUT_ME:
+            iconSection = {
+              component: PersonIcon,
+              class: "size-5 stroke-secondary-foreground dark:stroke-muted group-hover:stroke-accent"
+            };
+            break;
+          case RootSections.STACK_TECH:
+            iconSection = {
+              component: StackIcon,
+              class: "size-5 stroke-secondary-foreground dark:stroke-muted group-hover:stroke-accent"
+            };
+            break;
+          default:
+            iconSection = {
+              component: CodeIcon,
+              class: "size-5 stroke-secondary-foreground dark:stroke-muted group-hover:stroke-accent"
+            };
+        }
+        return { name, id, icon: iconSection }
+      })
 ---
 
-<nav class="flex gap-3 px-3 py-2 bg-navbar text-secondary-foreground dark:text-muted border-[1px] border-secondary-foreground dark:border-muted rounded-md shadow-nav">
-  <NavItem link="/#code">
-    <CodeIcon slot="icon" class="size-5 stroke-secondary-foreground dark:stroke-muted group-hover:stroke-accent" />
-    Proyectos
-  </NavItem>
-  <NavItem link="/#stack-tech">
-    <StackIcon slot="icon" class="size-5 stroke-secondary-foreground dark:stroke-muted group-hover:stroke-accent" />
-    Estudios
-  </NavItem>
-  <NavItem link="/#about">
-    <PersonIcon slot="icon" class="size-5 stroke-secondary-foreground dark:stroke-muted group-hover:stroke-accent" />
-    Sobre mí
-  </NavItem>
+<nav
+  class="flex gap-3 px-3 py-2 bg-navbar text-secondary-foreground dark:text-muted border-[1px] border-secondary-foreground dark:border-muted rounded-md shadow-nav"
+>
+  {
+    navItems?.map(({ name, id, icon: Icon }) => (
+        <NavItem link={`${page?.path}#${id}`}>
+          <Icon.component
+            slot="icon"
+            class={Icon.class}
+          />
+          {name}
+        </NavItem>
+      ))
+  }
 </nav>
