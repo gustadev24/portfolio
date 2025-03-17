@@ -1,7 +1,8 @@
 ---
 import SocialButtons from "@components/SocialButtons.astro";
 import Section from "@ui/Section.astro";
-import ShadowContainer from "@ui/ShadowContainer.astro";
+import { Image } from "astro:assets";
+import heroImage from "@assets/images/gustadev.webp";
 ---
 
 <Section class="space-between gap-80 items-center">
@@ -15,7 +16,7 @@ import ShadowContainer from "@ui/ShadowContainer.astro";
     </article>  
   </div>
   <div class="flex flex-col gap-6">
-    <img src="/gustadev.webp" alt="Gustavo Sequeiros" class="rounded-full aspect-square max-w-72 shadow-container" />
+    <Image src={heroImage} alt="Gustavo Sequeiros" class="rounded-full aspect-square max-w-72 shadow-container" />
     <SocialButtons />
   </div>
 </Section>
