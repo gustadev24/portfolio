@@ -6,7 +6,7 @@ interface Props {
 const { link } = Astro.props;
 ---
 
-<a class="flex gap-2 items-center hover:text-amber-500 hover:stroke-amber-500 hover:bg-radial hover:from-accent/15 hover:to-transparent hover:to-70% transition-colors hover:cursor-pointer group" href={link}>
+<a class="flex gap-2 items-center hover:text-accent hover:stroke-accent hover:bg-radial hover:from-accent/15 hover:to-transparent hover:to-70% transition-colors hover:cursor-pointer group" href={link}>
   <slot name="icon" />
   <slot />
 </a>
