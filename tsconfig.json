@@ -14,8 +14,8 @@
       "@layouts/*": [
         "src/layouts/*"
       ],
-      "@icons/*": [
-        "src/assets/icons/*"
+      "@assets/*": [
+        "src/assets/*"
       ],
       "@lib/*": [
         "src/lib/*"
@@ -28,6 +28,9 @@
       ],
       "@i18n/*": [
         "src/i18n/*"
+      ],
+      "@config/*": [
+        "src/config/*"
       ]
     },
     "plugins": [
