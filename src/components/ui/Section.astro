@@ -7,7 +7,7 @@ type Props = HTMLAttributes<'section'>;
 const { class: className, ...rest } = Astro.props
 ---
 
-<section class={cn("flex my-28 mx-24 max-w-6xl w-full justify-center", className)} {...rest}>
+<section class={cn("flex my-32 mx-24 max-w-6xl w-full justify-center", className)} {...rest}>
   <slot name="title" />
   <slot />
 </section>
