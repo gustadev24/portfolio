@@ -17,12 +17,21 @@ importers:
       '@fontsource-variable/figtree':
         specifier: ^5.2.5
         version: 5.2.5
+      '@fontsource-variable/fredoka':
+        specifier: ^5.2.6
+        version: 5.2.6
       '@tailwindcss/vite':
         specifier: ^4.0.10
         version: 4.0.10(vite@6.2.0(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))
       astro:
         specifier: ^5.4.2
         version: 5.4.2(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.8)(typescript@5.8.2)(yaml@2.7.0)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      tailwind-merge:
+        specifier: ^3.0.2
+        version: 3.0.2
       tailwindcss:
         specifier: ^4.0.10
         version: 4.0.10
@@ -266,6 +275,9 @@ packages:
 
   '@fontsource-variable/figtree@5.2.5':
     resolution: {integrity: sha512-8I7z1y66/0o16uxV+meKbhBA32i+qFkl7bOpO3nDa/yDKaOUjpB5CizpDqJtpB+kyud7hUn9JwL/kx2cRanpIw==}
+
+  '@fontsource-variable/fredoka@5.2.6':
+    resolution: {integrity: sha512-tPOsXUwvjHbdxjh6xpmUKQibpZhsprfAH0YTfCft6OdnPz4ry4puiRHk91ldgXINurhLtEiPTmky5ZF9eB3tKQ==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -1552,6 +1564,9 @@ packages:
     resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
     engines: {node: '>=4'}
 
+  tailwind-merge@3.0.2:
+    resolution: {integrity: sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==}
+
   tailwindcss@4.0.10:
     resolution: {integrity: sha512-Z8U/6E2BWSdDkt3IWPiphoV+8V6aNzRmu2SriSbuhm6i3QIcY3TdUJzUP5NX8M8MZuIl+v4/77Rer8u4YSrSsg==}
 
@@ -2158,6 +2173,8 @@ snapshots:
     optional: true
 
   '@fontsource-variable/figtree@5.2.5': {}
+
+  '@fontsource-variable/fredoka@5.2.6': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
@@ -3738,6 +3755,8 @@ snapshots:
       ansi-regex: 6.1.0
 
   strip-bom@3.0.0: {}
+
+  tailwind-merge@3.0.2: {}
 
   tailwindcss@4.0.10: {}
 
