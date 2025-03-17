@@ -1,0 +1,39 @@
+---
+import Button from "./ui/Button.astro";
+import GithubIcon from "@icons/github.svg";
+import LinkedinIcon from "@icons/linkedin.svg";
+import MailIcon from "@icons/mail.svg";
+
+const socialMedia = [
+  {
+    social: "github",
+    link: "https://github.com/gustadev24",
+    icon: GithubIcon,
+    class: "fill-button-foreground group-hover:fill-accent",
+  },
+  {
+    social: "linkedin",
+    link: "https://linkedin.com/in/luisgustavoseq/",
+    icon: LinkedinIcon,
+    class: "fill-button-foreground group-hover:fill-accent",
+  },
+  {
+    social: "email",
+    link: "mailto:lgsc21211@gmail.com",
+    icon: MailIcon,
+    class: "stroke-button-foreground group-hover:stroke-accent",
+  },
+];
+---
+
+<menu class="flex gap-4 justify-center">
+  {
+    socialMedia.map(({ link, icon: Icon, class: className }) => (
+      <li>
+        <Button as="a" href={link}>
+          <Icon slot="icon" width={20} height={20} class={className} />
+        </Button>
+      </li>
+    ))
+  }
+</menu>

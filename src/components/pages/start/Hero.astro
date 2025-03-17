@@ -1,17 +1,21 @@
 ---
+import SocialButtons from "@components/SocialButtons.astro";
 import Section from "@ui/Section.astro";
 import ShadowContainer from "@ui/ShadowContainer.astro";
 ---
 
-<Section class="space-between">
+<Section class="space-between gap-80 items-center">
   <div class="flex flex-col gap-10">
     <div class="flex flex-col gap-5">
-      <h1 class="text-primary-foreground text-5xl font-primary font-medium">Gustavo Sequeiros</h1>
-      <h3 class="text-muted text-3xl font-primary">Desarrollador web</h3>
+      <h1 class="text-primary-foreground text-6xl font-primary font-medium">Gustavo Sequeiros</h1>
+      <h3 class="text-muted text-4xl font-primary">Desarrollador web</h3>
     </div>
-    <ShadowContainer role="article" class="bg-secondary text-secondary-foreground p-3 text-lg">
+    <ShadowContainer role="article" class="bg-secondary text-secondary-foreground p-3 text-xl text-balance">
       Estudiante de Ingeniería de Sistemas en la UNSA, Perú. <span class="text-tertiary">Innovador y detallista.</span> Entusiasta por empezar nuevos proyectos y enfrentar desafíos.
     <ShadowContainer/>  
   </div>
-  
+  <div class="flex flex-col gap-6">
+    <img src="/gustadev.webp" alt="Gustavo Sequeiros" class="rounded-full aspect-square max-w-72" />
+    <SocialButtons />
+  </div>
 </Section>
