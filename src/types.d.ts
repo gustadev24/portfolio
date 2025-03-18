@@ -15,3 +15,10 @@ export interface ProjectCardType {
   github: string;
   preview?: string;
 }
+
+export interface TechType {
+  icon: typeof CodeIcon;
+  content: string;
+  class?: string;
+  iconClass?: string;
+}
