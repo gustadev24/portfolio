@@ -1,0 +1,73 @@
+---
+import Section from "@components/ui/Section.astro";
+import Title from "@components/ui/Title.astro";
+import CodeIcon from "@assets/icons/code.svg";
+import TailwindLogo from "@assets/icons/tailwindcss.svg";
+import NextJSLogo from "@assets/icons/nextjs.svg";
+import ACMProjectImage from "@assets/images/acm-project.png";
+import type { ProjectCardType, TagType } from "@types";
+import ProjectCard from "./ProjectCard.astro";
+import { RootSections } from "@config/pages";
+
+const tags: Record<string, TagType> = {
+  tailwind: {
+    content: "Tailwind CSS",
+    class: "bg-[#003159]",
+    icon: TailwindLogo,
+    iconClass: "w-4",
+  },
+  nextjs: {
+    content: "Next JS",
+    class: "bg-black",
+    icon: NextJSLogo,
+    iconClass: "w-4",
+  },
+  frontend: {
+    content: "Frontend",
+  },
+  trabajoEnEquipo: {
+    content: "Trabajo en Equipo",
+  },
+} as const;
+
+const projects: ProjectCardType[] = [
+  {
+    title: "ACM UNSA - Capítulo Estudiantil",
+    description: "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas.",
+    img: ACMProjectImage,
+    tags: [tags.tailwind, tags.nextjs, tags.frontend],
+    github: "https://github.com/ynoacamino/student-chapter-acm-page",
+    preview: "https://acm.ynoacamino.site"
+  },
+  {
+    title: "ACM UNSA - Capítulo Estudiantil",
+    description: "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas.",
+    img: ACMProjectImage,
+    tags: [tags.tailwind, tags.nextjs, tags.frontend],
+    github: "https://github.com/ynoacamino/student-chapter-acm-page",
+    preview: "https://acm.ynoacamino.site"
+  },
+  {
+    title: "ACM UNSA - Capítulo Estudiantil",
+    description: "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas.",
+    img: ACMProjectImage,
+    tags: [tags.tailwind, tags.nextjs, tags.frontend],
+    github: "https://github.com/ynoacamino/student-chapter-acm-page",
+    preview: "https://acm.ynoacamino.site"
+  }
+];
+---
+
+<Section id={RootSections.PROJECTS} class="flex-col gap-24">
+  <Title>
+    <CodeIcon class="size-10 stroke-primary-foreground" />
+    Proyectos
+  </Title>
+  <div class="grid grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))] auto-rows-auto gap-10  ">
+    {
+      projects.map((project) => (
+        <ProjectCard {...project} />
+      ))
+    }
+  </div>
+</Section>

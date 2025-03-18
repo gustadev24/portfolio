@@ -1,15 +1,53 @@
 ---
-interface Props {
-  img: string;
-  title: string;
-  tags: TechTagType;
-  description: string;
-  github: string;
-  preview?: string;
-}
+import type { ProjectCardType, TagType } from "@types";
+import Button from "@components/ui/Button.astro";
+import LinkIcon from "@assets/icons/link.svg";
+import GithubIcon from "@assets/icons/github.svg";
+import NewTabIcon from "@assets/icons/new-tab.svg";
+import { Image } from "astro:assets";
+import Tag from "./Tag.astro";
+
+type Props = ProjectCardType;
+
+const { img, title, tags, description, github, preview } = Astro.props;
 ---
 
-<article>
-  
-
+<article class="flex flex-col p-6 space-between gap-10 bg-secondary/35 rounded-2xl shadow-container">
+  <div class="flex flex-col gap-5">
+    <a href={preview || github} class="rounded-2xl overflow-clip relative group">
+      <Image src={img} alt={title} />
+      <div class="absolute inset-0 flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 z-10 bg-radial from-[#000000cc] to-[#232323cc] transition-opacity text-md text-secondary-foreground">
+        Visitar
+        <NewTabIcon class="size-3 fill-secondary-foreground" />
+      </div>
+    </a>
+    <div class="flex flex-col gap-2">
+      <h3 class="text-3xl text-primary-foreground font-primary">{title}</h3>
+      <div class="flex flex-wrap gap-x-2 gap-y-1">
+        {
+          tags.map(({ icon: Icon, content, class: className, iconClass }) => (
+            <Tag class={className}>
+              {Icon && <Icon slot="icon" class={iconClass} />}
+              {content}
+            </Tag>
+          ))
+        }
+      </div>
+    </div>
+    {description}
+  </div>
+  <div class="flex gap-3 justify-end">
+    {
+      preview && (
+        <Button as="a" href={preview} class="py-2">
+          <LinkIcon slot="icon" class="w-5 stroke-button-foreground group-hover:stroke-accent" />
+          Preview
+        </Button>
+      )
+    }
+    <Button as="a" href={github} class="py-2">
+      <GithubIcon slot="icon" class="w-5 fill-button-foreground group-hover:fill-accent" />
+      Github
+    </Button>
+  </div>
 </article>
