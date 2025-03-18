@@ -6,9 +6,10 @@ import BottomLeft from "@assets/images/bottom-left.png";
 import BottomRight from "@assets/images/bottom-right.png";
 import TopRight from "@assets/images/top-right.png";
 import { Image } from "astro:assets";
+import { RootSections } from "@config/pages";
 ---
 
-<Section class="flex-col">
+<Section class="flex-col" id={RootSections.ABOUT_ME}>
   <Title>
     <PersonIcon class="size-10 stroke-primary-foreground" />
     Sobre mí
