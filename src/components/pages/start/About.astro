@@ -1,0 +1,32 @@
+---
+import Section from "@components/ui/Section.astro";
+import Title from "@components/ui/Title.astro";
+import PersonIcon from "@assets/icons/person.svg";
+import BottomLeft from "@assets/images/bottom-left.png";
+import BottomRight from "@assets/images/bottom-right.png";
+import TopRight from "@assets/images/top-right.png";
+import { Image } from "astro:assets";
+---
+
+<Section class="flex-col">
+  <Title>
+    <PersonIcon class="size-10 stroke-primary-foreground" />
+    Sobre mí
+  </Title>
+  <article class="grid sm:grid-cols-3 sm:grid-rows-4 md:grid-rows-3 gap-4">
+    <div class="shadow-container bg-secondary/35 rounded-xl p-5 col-span-2 row-span-2 text-2xl">
+      Hola, me llamo <span class="text-tertiary">Luis Gustavo</span>. Soy desarrollador web enfocado en el
+      front-end y estudiante de <span class="text-tertiary">Ingeniería de Sistemas</span> en la Universidad
+      Nacional de San Agustín de Arequipa, en Perú. Me gusta <span class="text-primary-foreground">innovar y mejorar</span>
+      los trabajos que realizo. Me esmero por realizarlos bien en cada momento
+      de desarrollo. Disfruto del <span class="text-primary-foreground">trabajo en equipo</span>, observo y aprendo lo
+      positivo de cada persona y proyecto para mejorar mis prácticas. Ante los
+      desafíos, investigo, analizo, pido ayuda y <span class="text-primary-foreground">busco soluciones</span> de manera
+      proactiva.
+    </div>
+    <Image src={TopRight} alt="Top right" class="rounded-xl shadow-container w-full h-full object-cover" />
+    <Image src={BottomRight} alt="Bottom right" class="rounded-xl shadow-container w-full h-full object-cover row-span-2" />
+    <Image src={BottomLeft} alt="Bottom left" class="rounded-xl shadow-container w-full h-full object-cover col-span-2" />
+
+  </article>
+</Section>
