@@ -1,35 +1,136 @@
 ---
-import DesktopIcon from "@assets/icons/desktop.svg";
 import LanguageIcon from "@assets/icons/language.svg";
+import DesktopIcon from "@assets/icons/desktop.svg";
+import MoonIcon from "@assets/icons/moon.svg";
+import SunIcon from "@assets/icons/sun.svg";
 import NavItem from "./NavItem.astro";
+import { themeUIConfig as ThemeConfig, themes } from "@config/theme";
 
-const customItems = [
-  {
-    name: "Theme",
-    icon: DesktopIcon,
-    class:
-      "size-5 stroke-secondary-foreground dark:stroke-muted group-hover:stroke-accent",
-  },
-  {
-    name: "Language",
-    icon: LanguageIcon,
-    class:
-      "size-5 fill-secondary-foreground dark:fill-muted group-hover:fill-accent",
-  },
-];
+const ChangeLanguage = {
+  label: "change-language",
+  icon: LanguageIcon,
+  classIcon:
+    "size-5 fill-secondary-foreground dark:fill-muted group-hover:fill-accent",
+  options: [""],
+};
 ---
 
 <menu
-  class="flex gap-3 px-3 py-2 bg-navbar/80 dark:text-muted border-[1px] border-secondary-foreground dark:border-muted rounded-xl shadow-nav backdrop-blur-md"
+  class="flex gap-3 px-3 py-2 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-xl shadow-nav backdrop-blur-md"
 >
-  {
-    customItems.map(({ icon: Icon, class: className }) => (
-      <NavItem>
-        <Icon
-          slot="icon"
-          class={className}
-        />
-      </NavItem>
-    ))
-  }
+  <NavItem id={ThemeConfig.label} as="button" class="overflow-visible relative">
+    <div class="size-5 overflow-hidden" transition:persist>
+      <DesktopIcon id={themes.system.value} class="size-5 theme-icon" />
+      <MoonIcon id={themes.dark.value} class="size-5 theme-icon" />
+      <SunIcon id={themes.light.value} class="size-5 theme-icon" />  
+    </div>
+    <ul
+      id={`${ThemeConfig.label}-menu`}
+      class="absolute w-max bottom-12 left-0 flex-col text-secondary-foreground p-3 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-md shadow-nav backdrop-blur-md hidden animate-in"
+    >
+      {
+        ThemeConfig.options.map(({ display, icon: Icon, value }) => (
+          <li
+            class="flex gap-2 dark:stroke-muted items-center hover:text-accent hover:stroke-accent hover:bg-radial hover:from-accent/15 hover:to-transparent hover:to-70% transition-colors hover:cursor-pointer group theme-option"
+            data-value={value}
+          >
+            <Icon class="size-5" />
+            {display}
+          </li>
+        ))
+      }
+    </ul>
+  </NavItem>
+  <NavItem id={ChangeLanguage.label} as="button" class="overflow-visible">
+    <ChangeLanguage.icon class={ChangeLanguage.classIcon} />
+  </NavItem>
 </menu>
+
+<script is:inline>
+
+  const themeMenuId = "change-theme-menu";
+  const themeButtonId = "change-theme";
+
+  const themeMenu = document.getElementById(themeMenuId);
+  const themeButton = document.getElementById(themeButtonId);
+  const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
+  let remove = null;
+
+  themeButton?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isClosed = themeMenu?.classList.contains("hidden");
+    if (isClosed) {
+      themeMenu?.classList.remove("hidden");
+      themeMenu?.classList.add("flex");
+    } else {
+      themeMenu?.classList.remove("flex");
+      themeMenu?.classList.add("hidden");      
+    }
+  });
+
+  document.addEventListener("click", () => {
+    themeMenu?.classList.add("hidden");
+    themeMenu?.classList.remove("flex");
+  });
+
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined") {
+      return localStorage.getItem("theme") ?? themes.system.value;
+    }
+
+    return window.matchMedia(`(prefers-color-scheme: ${themes.dark.display})`)
+      .matches
+      ? themes.dark.value
+      : themes.light.value;
+  };
+
+  document.addEventListener(
+    "is-navbar-sticky",
+    (event) => {
+      if (event.detail) {
+        themeMenu?.classList.remove("bottom-12");
+        themeMenu?.classList.add("top-12");
+      } else {
+        themeMenu?.classList.add("bottom-12");
+        themeMenu?.classList.remove("top-12");
+      }
+    },
+  );
+  const updateIcon = (themePreference) => {
+    document.querySelectorAll(".theme-icon").forEach((element) => {
+      element.style.display = element.id === themePreference ? "flex" : "none";
+    });
+  };
+  const updateTheme = () => {
+    if (remove != null) {
+      remove();
+    }
+    matchMedia.addEventListener("change", updateTheme);
+    remove = () => matchMedia.removeEventListener("change", updateTheme);
+
+    const themePreference = getThemePreference();
+    const isDark =
+      themePreference === "dark" ||
+      (themePreference === "system" && matchMedia.matches);
+    updateIcon(themePreference);
+    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+  };
+  document.querySelectorAll(".theme-option").forEach((element) => {
+    element.addEventListener("click", (e) => {
+      e.stopPropagation();
+      localStorage.setItem(
+        "theme",
+        e.target.dataset.value || "",
+      );
+      updateTheme();
+      themeMenu?.classList.add("hidden");
+      themeMenu?.classList.remove("flex");
+    });
+  });
+
+  updateTheme();
+
+  document.addEventListener("astro:after-swap", () => {
+    updateTheme();
+  });
+</script>

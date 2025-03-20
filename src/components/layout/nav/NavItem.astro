@@ -1,12 +1,14 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import { cn } from '@lib/utils';
+import type { HTMLTag, Polymorphic } from 'astro/types';
 
-type Props = HTMLAttributes<'a'>;
+type TagType = 'a' | 'button';
 
-const { props } = Astro;
+type Props<TagName extends HTMLTag> = Polymorphic<{ as: TagName & TagType }>;
+
+const { as: Tag, class: className, ...rest } = Astro.props;
 ---
 
-<a class="flex gap-2 stroke-secondary-foreground dark:stroke-muted items-center hover:text-accent hover:stroke-accent hover:bg-radial hover:from-accent/15 hover:to-transparent hover:to-70% transition-colors hover:cursor-pointer group" {...props}>
-  <slot name="icon" />
+<Tag class={cn("flex gap-2 stroke-secondary-foreground dark:stroke-muted items-center hover:text-accent hover:stroke-accent hover:bg-radial hover:from-accent/15 hover:to-transparent hover:to-70% transition-colors hover:cursor-pointer group", className)} {...rest}>
   <slot />
-</a>
+</Tag>

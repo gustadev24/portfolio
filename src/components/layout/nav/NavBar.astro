@@ -2,8 +2,29 @@
 import Custom from "./Custom.astro";
 import Nav from "./Nav.astro";
 
+const navBarSentinelId = "navbar-sentinel";
 ---
-<div class="sticky top-4 right-0 mb-20 left-0 mx-auto w-max flex gap-4 text-lg z-30">
+
+<div id={navBarSentinelId} class="h-[1px] w-full" />
+
+<div
+  class="sticky top-4 right-0 mb-20 left-0 mx-auto w-max flex gap-4 text-lg z-30"
+>
   <Nav />
   <Custom />
 </div>
+
+<script>
+  const navBarSentinel = document.getElementById("navbar-sentinel");
+  
+  const callback: IntersectionObserverCallback = ([entry]) => {
+    const isSticky = !entry.isIntersecting;
+    console.log("is Sticky: ", isSticky);
+    document.dispatchEvent(
+      new CustomEvent("is-navbar-sticky", { detail: isSticky })
+    );
+  };
+
+  const observer = new IntersectionObserver(callback, { threshold: 0.01 });
+  if (navBarSentinel) observer.observe(navBarSentinel);
+</script>

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --primary: #F0EDFF;
   --primary-foreground: #070975;
@@ -15,20 +17,18 @@
   /* --background: radial-gradient(circle at top, var(--primary) 0, var(--secondary) 20%); */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #020932;
-    --primary-foreground: #FFD62C;
-    --secondary: #012754;
-    --secondary-foreground: #fff2cd;
-    --tertiary: #395DFF;
-    --accent: #EA780E;
-    --muted: #578AB1;
-    --navbar: #1E1E2E;
-    --button: #02183A;
-    --button-foreground: #95B2DC;
-    --button-hover: #492c0359;
-  }
+.dark {
+  --primary: #020932;
+  --primary-foreground: #FFD62C;
+  --secondary: #012754;
+  --secondary-foreground: #fff2cd;
+  --tertiary: #395DFF;
+  --accent: #EA780E;
+  --muted: #578AB1;
+  --navbar: #1E1E2E;
+  --button: #02183A;
+  --button-foreground: #95B2DC;
+  --button-hover: #492c0359;
 }
 
 @theme {
@@ -47,5 +47,18 @@
   --shadow-container: -2px 4px 6px 0 rgba(0, 0, 0, 0.25);
   --default-font-family: 'Figtree Variable', sans-serif;
   --font-primary: 'Fredoka Variable', sans-serif;
+  --animate-in: in 0.2s ease-in-out;
+
   /* --background: radial-gradient(circle at top, var(--primary) 0, var(--secondary) 20%); */
+  @keyframes in {
+    from {
+      opacity: 0;
+      scale: 0.8;
+    }
+
+    to {
+      opacity: 1;
+      scale: 1
+    }
+  }
 }

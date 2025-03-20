@@ -38,8 +38,8 @@ const navItems = page?.sections?.map(({ name, id }) => {
 >
   {
     navItems?.map(({ name, id, icon: Icon }) => (
-      <NavItem href={`${page?.path}#${id}`} aria-label={id}>
-        <Icon.component slot="icon" class={Icon.class} />
+      <NavItem as="a" href={`${page?.path}#${id}`} aria-label={id}>
+        <Icon.component class={Icon.class} />
         {name}
       </NavItem>
     ))

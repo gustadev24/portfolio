@@ -2,6 +2,7 @@
 import  "@styles/global.css";
 import "@fontsource-variable/figtree";
 import "@fontsource-variable/fredoka";
+import { ClientRouter } from "astro:transitions";
 const { title = "Gustadev - Desarrollador Web" } = Astro.props;
 ---
 
@@ -12,6 +13,7 @@ const { title = "Gustadev - Desarrollador Web" } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>{title}</title>
+		<ClientRouter />
 	</head>
 	<body class="flex flex-col items-center bg-radial-[at_top] from-secondary from-5% to-primary to-80% text-secondary-foreground">
 		<slot />
@@ -21,6 +23,7 @@ const { title = "Gustadev - Desarrollador Web" } = Astro.props;
 <style>
 	html,
 	body {
+		color-scheme: light dark;
 		margin: 0;
 		width: 100%;
 		min-height: 100%;
