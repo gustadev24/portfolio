@@ -1,0 +1,20 @@
+---
+import { cn } from '@lib/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class={cn("shadow-container bg-secondary/35 rounded-xl p-5 text-2xl", className)}>
+  Hola, me llamo <span class="text-tertiary">Luis Gustavo</span>. Soy desarrollador web enfocado en el
+  front-end y estudiante de <span class="text-tertiary">Ingeniería de Sistemas</span> en la Universidad
+  Nacional de San Agustín de Arequipa, en Perú. Me gusta <span class="text-primary-foreground">innovar y mejorar</span>
+  los trabajos que realizo. Me esmero por realizarlos bien en cada momento
+  de desarrollo. Disfruto del <span class="text-primary-foreground">trabajo en equipo</span>, observo y aprendo lo
+  positivo de cada persona y proyecto para mejorar mis prácticas. Ante los
+  desafíos, investigo, analizo, pido ayuda y <span class="text-primary-foreground">busco soluciones</span> de manera
+  proactiva.
+</div>

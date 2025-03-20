@@ -1,22 +1,64 @@
 ---
 import LanguageIcon from "@assets/icons/language.svg";
+import ChevronIcon from "@assets/icons/chevron-left.svg";
 import NavItem from "./NavItem.astro";
 import ThemeSwitcher from "./ThemeSwitcher.astro";
+
+const changeNavbarSideId = "change-navbar-side";
+const changeNavbarSideIconId = "change-navbar-side-icon";
 
 const ChangeLanguage = {
   label: "change-language",
   icon: LanguageIcon,
   classIcon:
-    "size-5 fill-secondary-foreground dark:fill-muted group-hover:fill-accent",
+    "size-5 stroke-transparent fill-secondary-foreground dark:fill-muted group-hover:fill-accent",
   options: [""],
 };
 ---
 
 <menu
-  class="flex gap-3 px-3 py-2 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-xl shadow-nav backdrop-blur-md"
+  class="flex flex-col md:flex-row gap-x-3 gap-y-4 px-2 py-4 md:py-2 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-xl shadow-nav backdrop-blur-md"
 >
   <ThemeSwitcher />
   <NavItem id={ChangeLanguage.label} as="button" class="overflow-visible">
     <ChangeLanguage.icon class={ChangeLanguage.classIcon} />
   </NavItem>
+  <NavItem id={changeNavbarSideId} as="button" class="flex md:hidden">
+    <ChevronIcon id={changeNavbarSideIconId} class="size-5" />
+  </NavItem>
 </menu>
+
+<script is:inline>
+  const changeNavbarSideId = "change-navbar-side";
+  const changeNavbarSideIconId = "change-navbar-side-icon";
+
+  const changeSideButton = document.getElementById(changeNavbarSideId);
+  const changeSideIcon = document.getElementById(changeNavbarSideIconId);
+
+  const getSidePreference = () => {
+    return localStorage.getItem("navbar-side") ?? "right";
+  };
+  const updateSideIcon = (side) => {
+    changeSideIcon.classList[side === "left" ? "add" : "remove"]("rotate-180");
+  };
+
+  const updateSide = (init) => {
+    const sidePreference = getSidePreference();
+    let changeSide = sidePreference === "left" ? "right" : "left";
+    if (init) changeSide = sidePreference;
+    localStorage.setItem("navbar-side", changeSide);
+    updateSideIcon(changeSide);
+    console.log("dispatch side event");
+    changeSideButton.dispatchEvent(
+      new CustomEvent("change-navbar-side", {
+        detail: changeSide,
+        bubbles: true,
+      }),
+    );
+  };
+
+  changeSideButton?.addEventListener("click", () => updateSide());
+
+  updateSide(true);
+
+</script>

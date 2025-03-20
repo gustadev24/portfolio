@@ -34,13 +34,13 @@ const navItems = page?.sections?.map(({ name, id }) => {
 ---
 
 <nav
-  class="flex gap-3 px-3 py-2 bg-navbar/80 text-secondary-foreground dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-xl shadow-nav backdrop-blur-md"
+  class="flex flex-col items-center md:flex-row gap-x-3 gap-y-4 px-2 py-4 md:py-2 bg-navbar/80 text-secondary-foreground dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-xl shadow-nav backdrop-blur-md"
 >
   {
     navItems?.map(({ name, id, icon: Icon }) => (
       <NavItem as="a" href={`${page?.path}#${id}`} aria-label={id}>
         <Icon.component class={Icon.class} />
-        {name}
+        <span class="hidden md:inline">{name}</span>
       </NavItem>
     ))
   }
