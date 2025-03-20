@@ -2,22 +2,28 @@
 import Custom from "./Custom.astro";
 import Nav from "./Nav.astro";
 
+const navBarContainerId = "navbar-container";
 const navBarSentinelId = "navbar-sentinel";
 ---
 
 <div id={navBarSentinelId} class="h-[1px] w-full" />
 
 <div
+  id={navBarContainerId}
   class="flex flex-col md:flex-row fixed right-2 top-0 bottom-0 my-auto md:sticky md:top-4 md:right-0 md:left-0 md:mb-20 md:mx-auto size-max gap-x-4 gap-y-3 text-lg z-30"
 >
   <Nav />
   <Custom />
 </div>
 
-<script>
-  const navBarSentinel = document.getElementById("navbar-sentinel");
+<script is:inline>
+  const navBarContainerId = "navbar-container";
+  const navBarSentinelId = "navbar-sentinel";
+
+  const navBarSentinel = document.getElementById(navBarSentinelId);
+  const navBarContainer = document.getElementById(navBarContainerId);
   
-  const callback: IntersectionObserverCallback = ([entry]) => {
+  const callback = ([entry]) => {
     const isSticky = !entry.isIntersecting;
     document.dispatchEvent(
       new CustomEvent("is-navbar-sticky", { detail: isSticky })
@@ -26,4 +32,26 @@ const navBarSentinelId = "navbar-sentinel";
 
   const observer = new IntersectionObserver(callback, { threshold: 0.01 });
   if (navBarSentinel) observer.observe(navBarSentinel);
+
+  const changeNavbarSide = (side) => {
+    if (side === "left") {
+      navBarContainer.classList.remove("right-2");
+      navBarContainer.classList.add("left-2");
+    } else {
+      navBarContainer.classList.remove("left-2");
+      navBarContainer.classList.add("right-2");
+    }
+  };
+
+  const initSide = () => {
+    const sidePreference = localStorage.getItem("navbar-side") ?? "right";
+    changeNavbarSide(sidePreference);
+  };
+
+  initSide();
+
+  navBarContainer?.addEventListener("change-navbar-side", (e) => {
+    e.stopPropagation();
+    changeNavbarSide(e.detail);
+  });
 </script>
