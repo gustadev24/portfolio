@@ -1,0 +1,15 @@
+---
+import { Image } from "astro:assets";
+import BottomLeft from "@assets/images/bottom-left.png";
+import BottomRight from "@assets/images/bottom-right.png";
+import TopRight from "@assets/images/top-right.png";
+import AboutDescription from "./AboutDescription.astro";
+---
+
+<article class="hidden md:grid grid-cols-3 grid-rows-3 gap-4">
+  <AboutDescription class="col-span-2 row-span-2"/>
+  <Image src={TopRight} alt="Top right" class="rounded-xl shadow-container w-full h-full object-cover" />
+  <Image src={BottomRight} alt="Bottom right" class="rounded-xl shadow-container w-full h-full object-cover row-span-2" />
+  <Image src={BottomLeft} alt="Bottom left" class="rounded-xl shadow-container w-full h-full object-cover col-span-2" />
+
+</article>

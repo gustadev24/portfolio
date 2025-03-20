@@ -1,0 +1,114 @@
+---
+import { Image } from "astro:assets";
+import ChevronLeftIcon from "@assets/icons/chevron-left.svg";
+import BottomLeft from "@assets/images/bottom-left.png";
+import BottomRight from "@assets/images/bottom-right.png";
+import TopRight from "@assets/images/top-right.png";
+import AboutDescription from "./AboutDescription.astro";
+import Button from "@components/ui/Button.astro";
+
+const images = [
+  {
+    meta: TopRight,
+    alt: "Top Right",
+    class: "",
+  },
+  {
+    meta: BottomRight,
+    alt: "Bottom Right",
+    class: "",
+  },
+  {
+    meta: BottomLeft,
+    alt: "Bottom Left",
+    class: "",
+  },
+];
+
+const leftButtonId = "left-button";
+const rightButtonId = "right-button";
+const containerSliderId = "container-slider";
+---
+
+<article class="flex md:hidden flex-col gap-4">
+  <AboutDescription />
+  <div class="h-[450px] rounded-xl shadow-container relative overflow-hidden">
+    <Button
+      id={leftButtonId}
+      as="button"
+      class="absolute left-0 bottom-0 z-10 rounded-none rounded-tl-none rounded-tr-xl rounded-bl-xl rounded-br-none p-1"
+    >
+      <ChevronLeftIcon
+        class="size-8 stroke-button-foreground group-hover:stroke-accent"
+      />
+    </Button>
+    <Button
+      id={rightButtonId}
+      as="button"
+      class="absolute right-0 bottom-0 z-10 rounded-none rounded-tl-xl rounded-tr-none rounded-bl-none rounded-br-xl p-1"
+    >
+      <ChevronLeftIcon
+        class="size-8 stroke-button-foreground group-hover:stroke-accent transform rotate-180"
+      />
+    </Button>
+    <div
+      id={containerSliderId}
+      class="flex size-full relative overflow-x-auto snap-x snap-mandatory"
+    >
+      {
+        images.map(({ meta, alt }) => (
+          <Image
+            src={meta}
+            alt={alt}
+            class:list={["object-cover size-full shrink-0 snap-center"]}
+          />
+        ))
+      }
+    </div>
+  </div>
+</article>
+
+<script>
+  const leftButtonId = "left-button";
+  const rightButtonId = "right-button";
+  const containerSliderId = "container-slider";
+
+  let scrollEnd = false;
+  let scrollStart = true;
+
+  const leftButton = document.getElementById(leftButtonId);
+  const rightButton = document.getElementById(rightButtonId);
+  const containerSlider = document.getElementById(containerSliderId);
+
+  leftButton?.addEventListener("click", () => {
+    if (containerSlider) {
+      let move = -containerSlider.offsetWidth;
+      if (scrollStart) {
+        move = containerSlider.scrollWidth - containerSlider.offsetWidth;
+      }
+      containerSlider.scrollBy({
+        left: move,
+        behavior: "smooth",
+      });
+    }
+  });
+
+  rightButton?.addEventListener("click", () => {
+    if (containerSlider) {
+      let move = containerSlider.offsetWidth;
+      if (scrollEnd) {
+        move = -containerSlider.scrollWidth + containerSlider.offsetWidth;
+      }
+      containerSlider.scrollBy({
+        left: move,
+        behavior: "smooth",
+      });
+    }
+  });
+
+  containerSlider?.addEventListener("scroll", () => {
+    const { scrollLeft, scrollWidth, offsetWidth } = containerSlider;
+    scrollStart = scrollLeft === 0;
+    scrollEnd = scrollLeft + offsetWidth >= scrollWidth;
+  });
+</script>
