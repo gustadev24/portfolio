@@ -19,7 +19,6 @@ const navBarSentinelId = "navbar-sentinel";
   
   const callback: IntersectionObserverCallback = ([entry]) => {
     const isSticky = !entry.isIntersecting;
-    console.log("is Sticky: ", isSticky);
     document.dispatchEvent(
       new CustomEvent("is-navbar-sticky", { detail: isSticky })
     );
