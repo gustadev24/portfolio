@@ -1,0 +1,22 @@
+---
+import LanguageIcon from "@assets/icons/language.svg";
+import NavItem from "./NavItem.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+
+const ChangeLanguage = {
+  label: "change-language",
+  icon: LanguageIcon,
+  classIcon:
+    "size-5 fill-secondary-foreground dark:fill-muted group-hover:fill-accent",
+  options: [""],
+};
+---
+
+<menu
+  class="flex gap-3 px-3 py-2 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-xl shadow-nav backdrop-blur-md"
+>
+  <ThemeSwitcher />
+  <NavItem id={ChangeLanguage.label} as="button" class="overflow-visible">
+    <ChangeLanguage.icon class={ChangeLanguage.classIcon} />
+  </NavItem>
+</menu>

@@ -1,0 +1,14 @@
+---
+import { cn } from "@lib/utils";
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type TagType = 'a' | 'button';
+
+type Props<TagName extends HTMLTag> = Polymorphic<{ as: TagName & TagType}>
+
+const { as: Tag, class: className, ...rest } = Astro.props;
+---
+<Tag class={cn("flex items-center gap-1.5 px-3 py-3 rounded-full border-[1px] text-button-foreground border-button-foreground bg-button hover:bg-button-hover hover:border-accent hover:text-accent group", className)} {...rest}>
+  <slot name="icon" />
+  <slot />
+</Tag>

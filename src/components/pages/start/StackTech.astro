@@ -1,0 +1,42 @@
+---
+import Section from "@components/ui/Section.astro";
+import type { TechType } from "@types";
+import Title from "@components/ui/Title.astro";
+import StackIcon from "@assets/icons/stack.svg";
+import TailwindLogo from "@assets/icons/tailwindcss.svg";
+import NextJSLogo from "@assets/icons/nextjs.svg";
+import { RootSections } from "@config/pages";
+import TechItem from "./TechItem.astro";
+
+const techs: TechType[] = [
+  {
+    content: "Tailwind CSS",
+    class: "bg-[#003159]",
+    icon: TailwindLogo,
+    iconClass: "size-14",
+  },
+  {
+    content: "Next JS",
+    class: "bg-black",
+    icon: NextJSLogo,
+    iconClass: "size-14",
+  },
+];
+---
+
+<Section class="flex-col" id={RootSections.STACK_TECH}>
+  <Title>
+    <StackIcon class="size-10 stroke-primary-foreground" />
+    Tecnologías
+  </Title>
+  <div class="flex flex-wrap gap-x-8 gap-y-16 justify-center">
+    {
+      techs.map(({ content, class: className, icon: Icon, iconClass}) => (
+        <TechItem info={content} class={className}>
+          <Icon class={iconClass} />
+        </TechItem>
+      ))
+    }
+  </div>
+
+</Section>

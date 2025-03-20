@@ -1,0 +1,14 @@
+---
+import { cn } from '@lib/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class={cn("flex gap-2 py-1 px-2 bg-secondary text-white text-sm rounded-full items-center", className)}>
+  <slot name="icon"/>
+  <span class="whitespace-nowrap"><slot /></span>
+</div>

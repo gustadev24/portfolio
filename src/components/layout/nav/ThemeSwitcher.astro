@@ -1,0 +1,123 @@
+---
+import DesktopIcon from "@assets/icons/desktop.svg";
+import MoonIcon from "@assets/icons/moon.svg";
+import SunIcon from "@assets/icons/sun.svg";
+import { themeUIConfig, themes } from "@config/theme";
+import NavItem from "./NavItem.astro";
+---
+<NavItem id={themeUIConfig.label} as="button" class="overflow-visible relative">
+  <div class="size-5 overflow-hidden" transition:persist>
+    <DesktopIcon id={themes.system.value} class="size-5 theme-icon" />
+    <MoonIcon id={themes.dark.value} class="size-5 theme-icon" />
+    <SunIcon id={themes.light.value} class="size-5 theme-icon" />  
+  </div>
+  <ul
+    id={`${themeUIConfig.label}-menu`}
+    class="absolute w-max bottom-12 left-0 flex-col text-secondary-foreground p-3 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-md shadow-nav backdrop-blur-md hidden animate-in"
+  >
+    {
+      themeUIConfig.options.map(({ display, icon: Icon, value }) => (
+        <li
+          class="flex gap-2 stroke-secondary-foreground dark:stroke-muted items-center hover:text-accent hover:stroke-accent hover:bg-radial hover:from-accent/15 hover:to-transparent hover:to-70% transition-colors hover:cursor-pointer group theme-option"
+          data-value={value}
+        >
+          <Icon class="size-5" />
+          {display}
+        </li>
+      ))
+    }
+  </ul>
+</NavItem>
+<script is:inline>
+  const themeMenuId = "change-theme-menu";
+  const themeButtonId = "change-theme";
+
+  const themeMenu = document.getElementById(themeMenuId);
+  const themeButton = document.getElementById(themeButtonId);
+  const matchDark = window.matchMedia("(prefers-color-scheme: dark)");
+  let remove = null;
+
+  // abrir y cerrar menú
+  themeButton?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isClosed = themeMenu?.classList.contains("hidden");
+    if (isClosed) {
+      themeMenu?.classList.remove("hidden");
+      themeMenu?.classList.add("flex");
+    } else {
+      themeMenu?.classList.remove("flex");
+      themeMenu?.classList.add("hidden");
+    }
+  });
+
+  // click fuera del menú
+  document.addEventListener("click", () => {
+    themeMenu?.classList.add("hidden");
+    themeMenu?.classList.remove("flex");
+  });
+  
+  // navbar pegajoso
+  document.addEventListener("is-navbar-sticky", (event) => {
+    if (event.detail) {
+      themeMenu?.classList.remove("bottom-12");
+      themeMenu?.classList.add("top-12");
+    } else {
+      themeMenu?.classList.add("bottom-12");
+      themeMenu?.classList.remove("top-12");
+    }
+  });
+
+  // ícono de acuerdo al tema
+  const updateIcon = (themePreference) => {
+    document.querySelectorAll(".theme-icon").forEach((element) => {
+      element.style.display = element.id === themePreference ? "flex" : "none";
+    });
+  };
+
+  // obtener tema del almacenamiento o del sistema
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined") {
+      return localStorage.getItem("theme") ?? themes.system.value;
+    }
+
+    return window.matchMedia(`(prefers-color-scheme: ${themes.dark.display})`)
+      .matches
+      ? themes.dark.value
+      : themes.light.value;
+  };
+
+  // Actualizar icono y escuchar cambios de tema desde el sistema operativo o navegador
+  const updateTheme = () => {
+    if (remove != null) {
+      remove();
+    }
+    matchDark.addEventListener("change", updateTheme);
+    remove = () => matchDark.removeEventListener("change", updateTheme);
+
+    const themePreference = getThemePreference();
+    const isDark =
+      themePreference === "dark" ||
+      (themePreference === "system" && matchDark.matches);
+    updateIcon(themePreference);
+    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+  };
+
+  // Actualizar tema con cada opción
+  document.querySelectorAll(".theme-option").forEach((element) => {
+    element.addEventListener("click", (e) => {
+      e.stopPropagation();
+      localStorage.setItem("theme", e.target.dataset.value || "");
+      updateTheme();
+      themeMenu?.classList.add("hidden");
+      themeMenu?.classList.remove("flex");
+    });
+  });
+
+  //Actuailización inicial del tema
+  updateTheme();
+
+  document.addEventListener("astro:after-swap", () => {
+    updateTheme();
+  });
+
+</script>

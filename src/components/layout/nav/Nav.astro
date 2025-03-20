@@ -1,0 +1,91 @@
+---
+import NavItem from "./NavItem.astro";
+import CodeIcon from "@assets/icons/code.svg";
+import StackIcon from "@assets/icons/stack.svg";
+import PersonIcon from "@assets/icons/person.svg";
+import pagesConfig from "@config/pages";
+import { RootSections } from "@config/pages";
+
+const page = pagesConfig.pages.find(({ path }) => path === "/");
+
+const navItems = page?.sections?.map(({ name, id }) => {
+  let iconSection: { component: typeof CodeIcon; class: string };
+  switch (id) {
+    case RootSections.ABOUT_ME:
+      iconSection = {
+        component: PersonIcon,
+        class: "size-5 group-hover:stroke-accent",
+      };
+      break;
+    case RootSections.STACK_TECH:
+      iconSection = {
+        component: StackIcon,
+        class: "size-5 group-hover:stroke-accent",
+      };
+      break;
+    default:
+      iconSection = {
+        component: CodeIcon,
+        class: "size-5 group-hover:stroke-accent",
+      };
+  }
+  return { name, id, icon: iconSection };
+});
+---
+
+<nav
+  class="flex gap-3 px-3 py-2 bg-navbar/80 text-secondary-foreground dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-xl shadow-nav backdrop-blur-md"
+>
+  {
+    navItems?.map(({ name, id, icon: Icon }) => (
+      <NavItem as="a" href={`${page?.path}#${id}`} aria-label={id}>
+        <Icon.component class={Icon.class} />
+        {name}
+      </NavItem>
+    ))
+  }
+</nav>
+
+<script>
+  const sections = document.querySelectorAll("section");
+  const navItems = document.querySelectorAll("nav a");
+  const intersectClass =
+    "text-accent bg-radial from-accent/15 to-transparent to-70%";
+
+  const callback: IntersectionObserverCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navItems.forEach((item) => {
+          const icon = item.querySelector("svg");
+          if (item.getAttribute("aria-label") == entry.target.id) {
+            item.classList.add(...intersectClass.split(" "));
+            icon?.classList.add("stroke-accent");
+          } else {
+            item.classList.remove(...intersectClass.split(" "));
+            icon?.classList.remove("stroke-accent");
+          }
+        });
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(callback, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.3,
+  });
+
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+
+  document.onvisibilitychange = () => {
+    if (document.visibilityState === "hidden") {
+      observer.disconnect();
+    } else {
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+    }
+  };
+</script>

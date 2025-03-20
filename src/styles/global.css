@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --primary: #F0EDFF;
+  --primary-foreground: #070975;
+  --secondary: #19284c33;
+  --secondary-foreground: #19284C;
+  --tertiary: #002BFF;
+  --accent: #D85301;
+  --muted: #5E80F0;
+  --navbar: #ECEFF8;
+  --button: #A3B5FF;
+  --button-foreground: #082863;
+  --button-hover: #fdb248b7;
+  /* --background: radial-gradient(circle at top, var(--primary) 0, var(--secondary) 20%); */
+}
+
+.dark {
+  --primary: #020932;
+  --primary-foreground: #FFD62C;
+  --secondary: #012754;
+  --secondary-foreground: #fff2cd;
+  --tertiary: #395DFF;
+  --accent: #EA780E;
+  --muted: #578AB1;
+  --navbar: #1E1E2E;
+  --button: #02183A;
+  --button-foreground: #95B2DC;
+  --button-hover: #492c0359;
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-tertiary: var(--tertiary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-navbar: var(--navbar);
+  --color-button: var(--button);
+  --color-button-foreground: var(--button-foreground);
+  --color-button-hover: var(--button-hover);
+  --shadow-nav: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+  --shadow-container: -2px 4px 6px 0 rgba(0, 0, 0, 0.25);
+  --default-font-family: 'Figtree Variable', sans-serif;
+  --font-primary: 'Fredoka Variable', sans-serif;
+  --animate-in: in 0.2s ease-in-out;
+
+  /* --background: radial-gradient(circle at top, var(--primary) 0, var(--secondary) 20%); */
+  @keyframes in {
+    from {
+      opacity: 0;
+      scale: 0.8;
+    }
+
+    to {
+      opacity: 1;
+      scale: 1
+    }
+  }
+}
