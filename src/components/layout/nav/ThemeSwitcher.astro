@@ -13,7 +13,7 @@ import NavItem from "./NavItem.astro";
   </div>
   <ul
     id={`${themeUIConfig.label}-menu`}
-    class="absolute w-max bottom-12 left-0 flex-col text-secondary-foreground p-3 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-md shadow-nav backdrop-blur-md hidden animate-in"
+    class="absolute w-max right-10 md:bottom-12 md:left-0 flex-col text-secondary-foreground p-3 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-md shadow-nav backdrop-blur-md hidden animate-in h-max"
   >
     {
       themeUIConfig.options.map(({ display, icon: Icon, value }) => (
@@ -43,9 +43,9 @@ import NavItem from "./NavItem.astro";
     const isClosed = themeMenu?.classList.contains("hidden");
     if (isClosed) {
       themeMenu?.classList.remove("hidden");
-      themeMenu?.classList.add("flex");
+      themeMenu?.classList.add("flex-col", "md:flex");
     } else {
-      themeMenu?.classList.remove("flex");
+      themeMenu?.classList.remove("flex-col", "md:flex");
       themeMenu?.classList.add("hidden");
     }
   });
@@ -53,17 +53,17 @@ import NavItem from "./NavItem.astro";
   // click fuera del menú
   document.addEventListener("click", () => {
     themeMenu?.classList.add("hidden");
-    themeMenu?.classList.remove("flex");
+    themeMenu?.classList.remove("flex-col", "md:flex");
   });
   
   // navbar pegajoso
   document.addEventListener("is-navbar-sticky", (event) => {
     if (event.detail) {
-      themeMenu?.classList.remove("bottom-12");
-      themeMenu?.classList.add("top-12");
+      themeMenu?.classList.remove("md:bottom-12");
+      themeMenu?.classList.add("md:top-12");
     } else {
-      themeMenu?.classList.add("bottom-12");
-      themeMenu?.classList.remove("top-12");
+      themeMenu?.classList.add("md:bottom-12");
+      themeMenu?.classList.remove("md:top-12");
     }
   });
 
@@ -109,7 +109,7 @@ import NavItem from "./NavItem.astro";
       localStorage.setItem("theme", e.target.dataset.value || "");
       updateTheme();
       themeMenu?.classList.add("hidden");
-      themeMenu?.classList.remove("flex");
+      themeMenu?.classList.remove("flex-col", "md:flex");
     });
   });
 
