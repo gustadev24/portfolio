@@ -15,7 +15,8 @@ const { title = "Gustadev - Desarrollador Web" } = Astro.props;
 		<title>{title}</title>
 		<ClientRouter />
 	</head>
-	<body class="flex flex-col items-center bg-radial-[at_top] from-secondary from-5% to-primary to-80% text-secondary-foreground">
+	<body class="flex flex-col items-center text-secondary-foreground">
+		<div class="fixed min-h-screen w-full -z-10 top-0 bg-radial-[125%_125%_at_50%_10%] from-primary to-[#93B5FF] dark:to-secondary" />
 		<slot />
 	</body>
 </html>
