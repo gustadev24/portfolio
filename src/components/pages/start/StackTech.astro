@@ -7,9 +7,10 @@ import TailwindLogo from "@assets/icons/tailwindcss.svg";
 import NextJSLogo from "@assets/icons/nextjs.svg";
 import { RootSections } from "@config/pages";
 import TechItem from "./TechItem.astro";
-import type { Locale } from "@i18n/index";
+import { DEFAULT_LOCALE, getI18n, Locale } from "@i18n/index";
 
-const { currentLocale } = Astro;
+const { currentLocale = DEFAULT_LOCALE } = Astro;
+const i18n = getI18n({ currentLocale: currentLocale as Locale });
 
 const techs: TechType[] = [
   {
@@ -30,7 +31,7 @@ const techs: TechType[] = [
 <Section class="flex-col" id={RootSections[currentLocale as Locale].STACK_TECH}>
   <Title>
     <StackIcon class="size-10 stroke-primary-foreground" />
-    Tecnologías
+    {i18n.STACK_TECH.TITLE}
   </Title>
   <div class="flex flex-wrap gap-x-8 gap-y-16 justify-center">
     {

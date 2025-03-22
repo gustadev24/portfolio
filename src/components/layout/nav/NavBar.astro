@@ -3,10 +3,7 @@ import Custom from "./Custom.astro";
 import Nav from "./Nav.astro";
 
 const navBarContainerId = "navbar-container";
-const navBarSentinelId = "navbar-sentinel";
 ---
-
-<div id={navBarSentinelId} class="h-[1px] w-full" />
 
 <div
   id={navBarContainerId}
@@ -17,21 +14,10 @@ const navBarSentinelId = "navbar-sentinel";
 </div>
 
 <script is:inline>
+  // Script de delaraciones
   const navBarContainerId = "navbar-container";
-  const navBarSentinelId = "navbar-sentinel";
 
-  const navBarSentinel = document.getElementById(navBarSentinelId);
-  const navBarContainer = document.getElementById(navBarContainerId);
-  
-  const callback = ([entry]) => {
-    const isSticky = !entry.isIntersecting;
-    document.dispatchEvent(
-      new CustomEvent("is-navbar-sticky", { detail: isSticky })
-    );
-  };
-
-  const observer = new IntersectionObserver(callback, { threshold: 0.01 });
-  if (navBarSentinel) observer.observe(navBarSentinel);
+  let navBarContainer = document.getElementById(navBarContainerId);
 
   const changeNavbarSide = (side) => {
     if (side === "left") {
@@ -47,11 +33,16 @@ const navBarSentinelId = "navbar-sentinel";
     const sidePreference = localStorage.getItem("navbar-side") ?? "right";
     changeNavbarSide(sidePreference);
   };
+</script>
+
+<script is:inline data-astro-rerun>
+
+  navBarContainer = document.getElementById(navBarContainerId);
+
 
   initSide();
 
-  navBarContainer?.addEventListener("change-navbar-side", (e) => {
-    e.stopPropagation();
+  document.addEventListener("change-navbar-side", (e) => {
     changeNavbarSide(e.detail);
   });
 </script>

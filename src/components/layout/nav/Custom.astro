@@ -19,15 +19,17 @@ const changeNavbarSideIconId = "change-navbar-side-icon";
 </menu>
 
 <script is:inline>
+  // Script de declaraciones
   const changeNavbarSideId = "change-navbar-side";
   const changeNavbarSideIconId = "change-navbar-side-icon";
 
-  const changeSideButton = document.getElementById(changeNavbarSideId);
-  const changeSideIcon = document.getElementById(changeNavbarSideIconId);
+  let changeSideButton = document.getElementById(changeNavbarSideId);
+  let changeSideIcon = document.getElementById(changeNavbarSideIconId);
 
   const getSidePreference = () => {
     return localStorage.getItem("navbar-side") ?? "right";
   };
+
   const updateSideIcon = (side) => {
     changeSideIcon.classList[side === "left" ? "add" : "remove"]("rotate-180");
   };
@@ -38,17 +40,19 @@ const changeNavbarSideIconId = "change-navbar-side-icon";
     if (init) changeSide = sidePreference;
     localStorage.setItem("navbar-side", changeSide);
     updateSideIcon(changeSide);
-    console.log("dispatch side event");
-    changeSideButton.dispatchEvent(
+    document.dispatchEvent(
       new CustomEvent("change-navbar-side", {
         detail: changeSide,
-        bubbles: true,
       }),
     );
   };
+</script>
 
-  changeSideButton?.addEventListener("click", () => updateSide());
+<script is:inline data-astro-rerun>
+  // Los elementos del DOM necesitan ser actualizados
+  changeSideButton = document.getElementById(changeNavbarSideId);
+  changeSideIcon = document.getElementById(changeNavbarSideIconId);
+  changeSideButton.addEventListener("click", () => updateSide());
 
   updateSide(true);
-
 </script>
