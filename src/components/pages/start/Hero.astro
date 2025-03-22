@@ -7,20 +7,52 @@ import { getI18n, Locale } from "@i18n/index";
 
 const { currentLocale } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
-
+const heroId = "hero-section";
 ---
 
-<Section class="justify-between gap-[10%] items-center hidden md:flex">
+<Section
+  id={heroId}
+  class="justify-between gap-[10%] items-center hidden md:flex"
+>
   <div class="flex flex-col gap-10">
     <div class="flex flex-col gap-5">
-      <h1 class="text-primary-foreground text-6xl font-primary font-medium">Gustavo Sequeiros</h1>
+      <h1 class="text-primary-foreground text-6xl font-primary font-medium">
+        Gustavo Sequeiros
+      </h1>
       <h3 class="text-muted text-4xl font-primary">{i18n.HERO.SUBTITLE}</h3>
     </div>
-    <article class="bg-secondary/35 text-secondary-foreground p-3 text-xl text-pretty shadow-container rounded-2xl max-w-xl" set:html={i18n.HERO.DESCRIPTION} />
-
+    <article
+      class="bg-secondary/35 text-secondary-foreground p-3 text-xl text-pretty shadow-container rounded-2xl max-w-xl"
+      set:html={i18n.HERO.DESCRIPTION}
+    />
   </div>
   <div class="flex flex-col gap-6">
-    <Image src={heroImage} alt="Gustavo Sequeiros" class="rounded-full aspect-square max-w-72 shadow-container" />
+    <Image
+      src={heroImage}
+      alt="Gustavo Sequeiros"
+      class="rounded-full aspect-square max-w-72 shadow-container"
+    />
     <SocialButtons />
   </div>
 </Section>
+
+<script is:inline>
+  const heroId = "hero-section";
+  let heroContainer = document.getElementById(heroId);
+
+  const callback = ([entry]) => {
+    const isSticky = !entry.isIntersecting;
+    document.dispatchEvent(
+      new CustomEvent("is-navbar-sticky", { detail: isSticky }),
+    );
+  };
+
+  const observer = new IntersectionObserver(callback, { threshold: 0.01 });
+</script>
+
+<script is:inline data-astro-rerun>
+  observer.unobserve(heroContainer);
+  heroContainer = document.getElementById(heroId);
+
+  if (heroContainer) observer.observe(heroContainer);
+</script>
