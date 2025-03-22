@@ -13,7 +13,7 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
 ---
 
 <NavItem id={themeUIConfig.label} as="button" class="overflow-visible relative">
-  <div class="size-5 overflow-hidden" transition:persist>
+  <div class="size-5 overflow-hidden">
     <DesktopIcon id={themes.system.value} class="size-5 theme-icon" />
     <MoonIcon id={themes.dark.value} class="size-5 theme-icon" />
     <SunIcon id={themes.light.value} class="size-5 theme-icon" />
@@ -21,7 +21,7 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
   <NavMenuContainer id={`${themeUIConfig.label}-menu`}>
     {
       themeUIConfig.options.map(({ icon: Icon, value }) => (
-        <NavMenuItem data-value={value}>
+        <NavMenuItem class="theme-option" data-value={value}>
           <Icon class="size-5" />
           {value === themes.system.value && i18n.NAVBAR.THEME.SYSTEM}
           {value === themes.dark.value && i18n.NAVBAR.THEME.DARK}
@@ -51,7 +51,7 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
   // obtener tema del almacenamiento o del sistema
   const getThemePreference = () => {
     if (typeof localStorage !== "undefined") {
-      return localStorage.getItem("theme") ?? "system";
+      return localStorage.getItem("theme") || "system";
     }
 
     return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -68,19 +68,26 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
     remove = () => matchDark.removeEventListener("change", updateTheme);
 
     const themePreference = getThemePreference();
+    console.log("Theme preference in updateTheme: ", themePreference);
     const isDark =
       themePreference === "dark" ||
       (themePreference === "system" && matchDark.matches);
     updateIcon(themePreference);
     document.documentElement.classList[isDark ? "add" : "remove"]("dark");
   };
+
+  document.addEventListener("astro:after-swap", () => {
+    console.log("Despies del cambio de tema");
+    updateTheme();
+  });
+  console.log("Primera actualizacion de tema");
+  updateTheme();
 </script>
 
 <script is:inline data-astro-rerun>
   themeMenu = document.getElementById(themeMenuId);
   themeButton = document.getElementById(themeButtonId);
   matchDark = window.matchMedia("(prefers-color-scheme: dark)");
-  remove = null;
 
   // abrir y cerrar menú
   themeButton?.addEventListener("click", (e) => {
@@ -127,16 +134,10 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
     element.addEventListener("click", (e) => {
       e.stopPropagation();
       localStorage.setItem("theme", e.target.dataset.value || "");
+      console.log("Valor de la opción: ", e.target);
       updateTheme();
       themeMenu?.classList.add("hidden");
       themeMenu?.classList.remove("flex-col", "md:flex");
     });
-  });
-
-  //Actuailización inicial del tema
-  updateTheme();
-
-  document.addEventListener("astro:after-swap", () => {
-    updateTheme();
   });
 </script>

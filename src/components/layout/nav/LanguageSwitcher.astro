@@ -38,6 +38,7 @@ import { languages } from "@i18n/ui";
     const translatePath = useTranslatedPath(locale);
 
     const changeLanguage = (locale: Locale) => {
+      console.log(window.location.pathname, "; ",locale)
       const newPath = translatePath(window.location.pathname, locale);
       navigate(newPath);
     };
