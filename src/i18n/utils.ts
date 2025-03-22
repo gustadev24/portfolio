@@ -22,11 +22,11 @@ export function getHashKey(hash: string, lang: Locale) { // #sobre-mí lang: es
 // Traducir del idioma lang al idioma l
 export function useTranslatedPath(lang: Locale) {
   return function translatePath(path: string, l: Locale = lang) {
-    const langRoute = l === DEFAULT_LOCALE ? '' : `/${l}/`;
-    const hash: HashRootRoutes = path.split('#').at(1) as HashRootRoutes;
-    const keyHash = getHashKey(hash, lang)
+    const langRoute = l === DEFAULT_LOCALE ? '/' : `/${l}/`;
+    const hash = path.split('#').at(1);
+    const keyHash = getHashKey(hash || '', lang)
     if (!hash || !keyHash) {
-      return langRoute ? langRoute : '/';
+      return langRoute;
     }
     // No es necesario traducir si el idioma es el mismo
     if (l === lang) {

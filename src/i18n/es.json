@@ -41,6 +41,9 @@
       "VISIT": "Visitar"
     }
   },
+  "STACK_TECH": {
+    "TITLE": "Tecnologías"
+  },
   "ABOUT": {
     "TITLE": "Sobre mí",
     "DESCRIPTION": "Hola, me llamo <strong class=\"text-tertiary\">Luis Gustavo</strong>. Soy desarrollador web enfocado en el front-end y estudiante de <strong class=\"text-tertiary\">Ingeniería de Sistemas</strong> en la Universidad Nacional de San Agustín de Arequipa, en Perú. Me gusta <strong class=\"text-primary-foreground\">innovar y mejorar</strong> los trabajos que realizo. Me esmero por realizarlos bien en cada momento de desarrollo. Disfruto del <strong class=\"text-primary-foreground\">trabajo en equipo</strong>, observo y aprendo lo positivo de cada persona y proyecto para mejorar mis prácticas. Ante los desafíos, investigo, analizo, pido ayuda y <strong class=\"text-primary-foreground\">busco soluciones</strong> de manera proactiva."    

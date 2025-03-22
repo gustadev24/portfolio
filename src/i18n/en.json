@@ -41,6 +41,9 @@
       "VISIT": "Visit"
     }
   },
+  "STACK_TECH": {
+    "TITLE": "Stack Tech"
+  },
   "ABOUT": {
     "TITLE": "About me",
     "DESCRIPTION": "Hello, my name is <strong class=\"text-tertiary\">Luis Gustavo</strong>. I am a web developer focused on the front-end and a student of <strong class=\"text-tertiary\">Systems Engineering</strong> at the National University of San Agustín de Arequipa, in Peru. I like <strong class=\"text-primary-foreground\">innovating and improving</strong> the work I do. I strive to do them well at every stage of development. I enjoy <strong class=\"text-primary-foreground\">teamwork</strong>, I observe and learn the positive aspects of each person and project to improve my practices. Faced with challenges, I investigate, analyze, ask for help and <strong class=\"text-primary-foreground\">seek solutions</strong> proactively."
