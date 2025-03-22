@@ -6,6 +6,10 @@ import GithubIcon from "@assets/icons/github.svg";
 import NewTabIcon from "@assets/icons/new-tab.svg";
 import { Image } from "astro:assets";
 import Tag from "./Tag.astro";
+import { getI18n, Locale } from "@i18n/index";
+
+const { currentLocale } = Astro;
+const i18n = getI18n({ currentLocale: currentLocale as Locale });
 
 type Props = ProjectCardType;
 
@@ -17,7 +21,7 @@ const { img, title, tags, description, github, preview } = Astro.props;
     <a href={preview || github} class="rounded-2xl overflow-clip relative group">
       <Image src={img} alt={title} />
       <div class="absolute inset-0 flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 z-10 bg-radial from-[#000000cc] to-[#232323cc] transition-opacity text-md text-secondary-foreground">
-        Visitar
+        {i18n.PROJECTS.CARD.VISIT}
         <NewTabIcon class="size-3 fill-secondary-foreground" />
       </div>
     </a>
@@ -41,13 +45,13 @@ const { img, title, tags, description, github, preview } = Astro.props;
       preview && (
         <Button as="a" href={preview} class="py-2">
           <LinkIcon slot="icon" class="w-5 stroke-button-foreground group-hover:stroke-accent" />
-          Preview
+          {i18n.PROJECTS.CARD.PREVIEW}
         </Button>
       )
     }
     <Button as="a" href={github} class="py-2">
       <GithubIcon slot="icon" class="w-5 fill-button-foreground group-hover:fill-accent" />
-      Github
+      {i18n.PROJECTS.CARD.SOURCE_CODE}
     </Button>
   </div>
 </article>

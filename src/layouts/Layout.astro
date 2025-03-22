@@ -3,14 +3,22 @@ import  "@styles/global.css";
 import "@fontsource-variable/figtree";
 import "@fontsource-variable/fredoka";
 import { ClientRouter } from "astro:transitions";
-const { title = "Gustadev - Desarrollador Web" } = Astro.props;
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { currentLocale } = Astro;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang={currentLocale} class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>{title}</title>
 		<ClientRouter />

@@ -5,29 +5,42 @@ import StackIcon from "@assets/icons/stack.svg";
 import PersonIcon from "@assets/icons/person.svg";
 import pagesConfig from "@config/pages";
 import { RootSections } from "@config/pages";
+import { DEFAULT_LOCALE, getI18n, Locale } from "@i18n/index";
+import { useTranslatedPath } from "@i18n/utils";
+import type { HashRootRoutes } from "@config/pages";
 
-const page = pagesConfig.pages.find(({ path }) => path === "/");
+const { currentLocale = DEFAULT_LOCALE } = Astro;
+const locale = currentLocale as Locale;
+const i18n = getI18n({ currentLocale: locale });
 
-const navItems = page?.sections?.map(({ name, id }) => {
+const hashesRootSections = Object.keys(pagesConfig.pages.en.sections) as HashRootRoutes[];
+
+const translatePath = useTranslatedPath(locale);
+
+const navItems = hashesRootSections.map((id) => {
   let iconSection: { component: typeof CodeIcon; class: string };
+  let name;
   switch (id) {
-    case RootSections.ABOUT_ME:
+    case RootSections[Locale.EN].ABOUT_ME:
       iconSection = {
         component: PersonIcon,
         class: "size-5 group-hover:stroke-accent",
       };
+      name = i18n.NAVBAR.ABOUT;
       break;
-    case RootSections.STACK_TECH:
+    case RootSections[Locale.EN].STACK_TECH:
       iconSection = {
         component: StackIcon,
         class: "size-5 group-hover:stroke-accent",
       };
+      name = i18n.NAVBAR.STACK_TECH;
       break;
     default:
       iconSection = {
         component: CodeIcon,
         class: "size-5 group-hover:stroke-accent",
       };
+      name = i18n.NAVBAR.PROJECTS;
   }
   return { name, id, icon: iconSection };
 });
@@ -38,7 +51,7 @@ const navItems = page?.sections?.map(({ name, id }) => {
 >
   {
     navItems?.map(({ name, id, icon: Icon }) => (
-      <NavItem as="a" href={`${page?.path}#${id}`} aria-label={id}>
+      <NavItem as="a" href={translatePath(`#${id}`)} aria-label={id}>
         <Icon.component class={Icon.class} />
         <span class="hidden md:inline">{name}</span>
       </NavItem>

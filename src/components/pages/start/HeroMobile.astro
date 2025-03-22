@@ -3,6 +3,10 @@ import SocialButtons from "@components/SocialButtons.astro";
 import Section from "@components/ui/Section.astro";
 import { Image } from "astro:assets";
 import heroImage from "@assets/images/gustadev.webp";
+import { getI18n, Locale } from "@i18n/index";
+
+const { currentLocale } = Astro;
+const i18n = getI18n({ currentLocale: currentLocale as Locale});
 ---
 
 <Section class="flex-col justify-between gap-14 items-center md:hidden">
@@ -10,7 +14,7 @@ import heroImage from "@assets/images/gustadev.webp";
     <h1 class="text-primary-foreground text-6xl font-primary font-medium text-center">
       Gustavo Sequeiros
     </h1>
-    <h3 class="text-muted text-4xl font-primary text-center">Desarrollador web</h3>
+    <h3 class="text-muted text-4xl font-primary text-center">{i18n.HERO.SUBTITLE}</h3>
   </div>
   <div class="flex flex-col gap-5">
     <SocialButtons />
@@ -21,10 +25,5 @@ import heroImage from "@assets/images/gustadev.webp";
     />
   </div>
   <article
-    class="bg-secondary/35 text-secondary-foreground p-3 text-xl text-pretty shadow-container rounded-2xl max-w-md"
-  >
-    Estudiante de Ingeniería de Sistemas en la UNSA, Perú. <span
-      class="text-tertiary">Innovador y detallista.</span
-    > Entusiasta por empezar nuevos proyectos y enfrentar desafíos.
-  </article>
+    class="bg-secondary/35 text-secondary-foreground p-3 text-xl text-pretty shadow-container rounded-2xl max-w-md" set:html={i18n.HERO.DESCRIPTION}>
 </Section>
