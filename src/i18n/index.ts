@@ -1,13 +1,21 @@
-import { DEFAULT_LOCALE, Locale } from "src/config/locales";
-import spanish from '@i18n/es.json';
-import english from '@i18n/en.json';
+import spanish from './es.json';
+import english from './en.json';
+
+export enum Locale {
+  ES = 'es',
+  EN = 'en'
+}
+
+export const ALL_LOCALES = Object.values(Locale);
+
+export const DEFAULT_LOCALE = Locale.ES;
 
 export const getI18n = ({
-  locale = DEFAULT_LOCALE
+  currentLocale = DEFAULT_LOCALE
 }: {
-  locale: Locale
+  currentLocale: Locale
 }) => {
-  switch (locale) {
+  switch (currentLocale) {
     case Locale.EN:
       return { ...spanish, ...english };
     default:

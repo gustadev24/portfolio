@@ -1,0 +1,68 @@
+---
+import NavItem from "./NavItem.astro";
+import LanguageIcon from "@assets/icons/language.svg";
+import NavMenuContainer from "./NavMenuContainer.astro";
+import NavMenuItem from "./NavMenuItem.astro";
+import { ui } from "@i18n/ui";
+import { languages } from "@i18n/ui";
+import { useTranslatedPath, getHashFromUrl } from "@i18n/utils";
+import { DEFAULT_LOCALE, type Locale } from "@i18n/index";
+
+const { url, currentLocale = DEFAULT_LOCALE } = Astro;
+const locale = currentLocale as Locale;
+const translatePath = useTranslatedPath(locale);
+---
+
+<NavItem id={ui.label} as="button" class="overflow-visible relative">
+  <div class="size-5 overflow-hidden" transition:persist>
+    <LanguageIcon
+      class="size-5 stroke-transparent fill-secondary-foreground dark:fill-muted group-hover:fill-accent"
+    />
+  </div>
+  <NavMenuContainer id={`${ui.label}-menu`}>
+    {
+      Object.values(languages).map(({ code, name }) => (
+        <NavMenuItem>
+          <a href={translatePath(getHashFromUrl(url, locale), code)}>{name}</a>
+        </NavMenuItem>
+      ))
+    }
+  </NavMenuContainer>
+</NavItem>
+<script>
+  const languageMenuId = "change-language-menu";
+  const languageButtonId = "change-language";
+
+  const languageMenu = document.getElementById(languageMenuId);
+  const languageButton = document.getElementById(languageButtonId);
+
+  // abrir y cerrar menú
+  languageButton?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isClosed = languageMenu?.classList.contains("hidden");
+    if (isClosed) {
+      languageMenu?.classList.remove("hidden");
+      languageMenu?.classList.add("flex-col", "md:flex");
+    } else {
+      languageMenu?.classList.remove("flex-col", "md:flex");
+      languageMenu?.classList.add("hidden");
+    }
+  });
+
+  // click fuera del menú
+  document.addEventListener("click", () => {
+    languageMenu?.classList.add("hidden");
+    languageMenu?.classList.remove("flex-col", "md:flex");
+  });
+
+  // navbar pegajoso
+  document.addEventListener("is-navbar-sticky", ((event: CustomEvent) => {
+    if (event.detail) {
+      languageMenu?.classList.remove("md:bottom-12");
+      languageMenu?.classList.add("md:top-12");
+    } else {
+      languageMenu?.classList.add("md:bottom-12");
+      languageMenu?.classList.remove("md:top-12");
+    }
+  }) as EventListener);
+</script>

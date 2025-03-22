@@ -8,6 +8,10 @@ import ACMProjectImage from "@assets/images/acm-project.png";
 import type { ProjectCardType, TagType } from "@types";
 import ProjectCard from "./ProjectCard.astro";
 import { RootSections } from "@config/pages";
+import { getI18n, Locale } from "@i18n/index";
+
+const { currentLocale } = Astro;
+const i18n = getI18n({ currentLocale: currentLocale as Locale });
 
 const tags: Record<string, TagType> = {
   tailwind: {
@@ -23,33 +27,33 @@ const tags: Record<string, TagType> = {
     iconClass: "w-4",
   },
   frontend: {
-    content: "Frontend",
+    content: i18n.PROJECTS.CARD.TAGS.FRONTEND,
   },
   trabajoEnEquipo: {
-    content: "Trabajo en Equipo",
+    content: i18n.PROJECTS.CARD.TAGS.TEAM_WORK,
   },
 } as const;
 
 const projects: ProjectCardType[] = [
   {
-    title: "ACM UNSA - Capítulo Estudiantil",
-    description: "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas.",
+    title: i18n.PROJECTS["ACM-1"].TITLE,
+    description: i18n.PROJECTS["ACM-1"].DESCRIPTION,
     img: ACMProjectImage,
     tags: [tags.tailwind, tags.nextjs, tags.frontend],
     github: "https://github.com/ynoacamino/student-chapter-acm-page",
     preview: "https://acm.ynoacamino.site"
   },
   {
-    title: "ACM UNSA - Capítulo Estudiantil",
-    description: "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas.",
+    title: i18n.PROJECTS["ACM-2"].TITLE,
+    description: i18n.PROJECTS["ACM-2"].DESCRIPTION,
     img: ACMProjectImage,
     tags: [tags.tailwind, tags.nextjs, tags.frontend],
     github: "https://github.com/ynoacamino/student-chapter-acm-page",
     preview: "https://acm.ynoacamino.site"
   },
   {
-    title: "ACM UNSA - Capítulo Estudiantil",
-    description: "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas.",
+    title: i18n.PROJECTS["ACM-3"].TITLE,
+    description: i18n.PROJECTS["ACM-3"].DESCRIPTION,
     img: ACMProjectImage,
     tags: [tags.tailwind, tags.nextjs, tags.frontend],
     github: "https://github.com/ynoacamino/student-chapter-acm-page",
@@ -58,10 +62,10 @@ const projects: ProjectCardType[] = [
 ];
 ---
 
-<Section id={RootSections.PROJECTS} class="flex-col">
+<Section id={RootSections[currentLocale as Locale].PROJECTS} class="flex-col">
   <Title>
     <CodeIcon class="size-10 stroke-primary-foreground" />
-    Proyectos
+    {i18n.PROJECTS.TITLE}
   </Title>
   <div class="grid grid-cols-1 md:grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))] auto-rows-auto gap-10  ">
     {

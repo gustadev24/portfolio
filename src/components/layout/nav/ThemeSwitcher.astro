@@ -4,6 +4,12 @@ import MoonIcon from "@assets/icons/moon.svg";
 import SunIcon from "@assets/icons/sun.svg";
 import { themeUIConfig, themes } from "@config/theme";
 import NavItem from "./NavItem.astro";
+import { getI18n, Locale } from "@i18n/index";
+import NavMenuContainer from "./NavMenuContainer.astro";
+import NavMenuItem from "./NavMenuItem.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18n({ currentLocale: currentLocale as Locale });
 ---
 <NavItem id={themeUIConfig.label} as="button" class="overflow-visible relative">
   <div class="size-5 overflow-hidden" transition:persist>
@@ -11,22 +17,22 @@ import NavItem from "./NavItem.astro";
     <MoonIcon id={themes.dark.value} class="size-5 theme-icon" />
     <SunIcon id={themes.light.value} class="size-5 theme-icon" />  
   </div>
-  <ul
+  <NavMenuContainer
     id={`${themeUIConfig.label}-menu`}
-    class="absolute w-max right-10 md:bottom-12 md:left-0 flex-col text-secondary-foreground p-3 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-md shadow-nav backdrop-blur-md hidden animate-in h-max"
   >
     {
-      themeUIConfig.options.map(({ display, icon: Icon, value }) => (
-        <li
-          class="flex gap-2 stroke-secondary-foreground dark:stroke-muted items-center hover:text-accent hover:stroke-accent hover:bg-radial hover:from-accent/15 hover:to-transparent hover:to-70% transition-colors hover:cursor-pointer group theme-option"
+      themeUIConfig.options.map(({ icon: Icon, value }) => (
+        <NavMenuItem
           data-value={value}
         >
           <Icon class="size-5" />
-          {display}
-        </li>
+          {value === themes.system.value && i18n.NAVBAR.THEME.SYSTEM}
+          {value === themes.dark.value && i18n.NAVBAR.THEME.DARK}
+          {value === themes.light.value && i18n.NAVBAR.THEME.LIGHT}
+        </NavMenuItem>
       ))
     }
-  </ul>
+  </NavMenuContainer>
 </NavItem>
 <script is:inline>
   const themeMenuId = "change-theme-menu";

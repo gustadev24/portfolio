@@ -1,0 +1,51 @@
+{
+  "SEO_TITLE": "Gustavo Sequeiros - Web Developer",
+  "SEO_DESCRIPTION": "Frontend Web Developer with experience in technologies such as React, NextJS, Astro, TailwindCSS, among others.",
+  "HERO": {
+    "SUBTITLE": "Web Developer",
+    "DESCRIPTION": "Systems Engineering student at UNSA, Peru. <strong class=\"text-tertiary\">Innovative and detail-oriented.</strong> Enthusiastic about starting new projects and facing challenges."
+  },
+  "NAVBAR": {
+    "PROJECTS": "Projects",
+    "STACK_TECH": "Technologies",
+    "ABOUT": "About me",
+    "THEME": {
+      "LIGHT": "Light",
+      "DARK": "Dark",
+      "SYSTEM": "System"
+    }
+  },
+  "PROJECTS": {
+    "TITLE": "Projects",
+    "ACM-1": {
+      "TITLE": "ACM UNSA - Student Chapter",
+      "DESCRIPTION": "Landing with information about the Student Chapter of the ACM at its UNSA headquarters. Developed from scratch and open source in a team of two."
+    },
+    "ACM-2": {
+      "TITLE": "ACM UNSA - Student Chapter",
+      "DESCRIPTION": "Landing with information about the Student Chapter of the ACM at its UNSA headquarters. Developed from scratch and open source in a team of two."
+    },
+    "ACM-3": {
+      "TITLE": "ACM UNSA - Student Chapter",
+      "DESCRIPTION": "Landing with information about the Student Chapter of the ACM at its UNSA headquarters. Developed from scratch and open source in a team of two."
+    },
+    "CARD": {
+      "TAGS": {
+        "FRONTEND": "Frontend",
+        "BACKEND": "Backend",
+        "FULLSTACK": "Fullstack",
+        "TEAM_WORK": "Team work"
+      },
+      "PREVIEW": "Visit",
+      "SOURCE_CODE": "Code",
+      "VISIT": "Visit"
+    }
+  },
+  "ABOUT": {
+    "TITLE": "About me",
+    "DESCRIPTION": "Hello, my name is <strong class=\"text-tertiary\">Luis Gustavo</strong>. I am a web developer focused on the front-end and a student of <strong class=\"text-tertiary\">Systems Engineering</strong> at the National University of San Agustín de Arequipa, in Peru. I like <strong class=\"text-primary-foreground\">innovating and improving</strong> the work I do. I strive to do them well at every stage of development. I enjoy <strong class=\"text-primary-foreground\">teamwork</strong>, I observe and learn the positive aspects of each person and project to improve my practices. Faced with challenges, I investigate, analyze, ask for help and <strong class=\"text-primary-foreground\">seek solutions</strong> proactively."
+  },
+  "FOOTER": {
+    "DESCRIPTION": "Developed with <span class=\"text-primary-foreground\">Astro</span>, <span class=\"text-primary-foreground\">Tailwind</span> and <span class=\"text-primary-foreground\">React</span> by <span class=\"text-accent\">@gustadev24</span>."
+  }
+}

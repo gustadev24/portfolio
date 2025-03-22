@@ -1,0 +1,15 @@
+---
+import { cn } from "@lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"ul">;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<ul
+  class={cn("absolute w-max right-10 md:bottom-12 md:left-0 flex-col text-secondary-foreground p-3 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-md shadow-nav backdrop-blur-md hidden animate-in h-max", className)}
+  {...rest}
+>
+  <slot />
+</ul>

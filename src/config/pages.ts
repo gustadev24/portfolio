@@ -1,56 +1,60 @@
+import { Locale } from "@i18n/index";
 import { SITE_URL } from "./variable";
 
-export interface Section {
-  name: string;
-  id: string;
+export const RootSections = {
+  [Locale.ES]: {
+    PROJECTS: 'proyectos',
+    STACK_TECH: 'tecnologías',
+    ABOUT_ME: 'sobre-mí',
+  },
+  [Locale.EN]: {
+    PROJECTS: 'projects',
+    STACK_TECH: 'stack-tech',
+    ABOUT_ME: 'about-me',
+  },
 }
 
-export interface Page {
-  name: string;
-  path: string;
-  sections?: Section[];
-}
-
-export interface PageConfig {
-  domain: string;
-  pages: Page[];
-}
-
-export enum RootSections {
-  PROJECTS = 'proyectos',
-  STACK_TECH = 'tecnologías',
-  ABOUT_ME = 'sobre-mí',
-}
+export type HashRootRoutes = "projects" | "stack-tech" | "about";
 
 const pagesConfigInit = () => {
 
   return (
     {
       domain: SITE_URL,
-      pages: [
-        {
-          name: 'Inicio',
+      pages: {
+        [Locale.ES]: {
           path: '/',
-          sections: [
-            {
-              name: 'Proyectos',
-              id: RootSections.PROJECTS,
+          sections: {
+            projects: {
+              id: RootSections[Locale.ES].PROJECTS,
             },
-            {
-              name: 'Tecnologías',
-              id: RootSections.STACK_TECH,
+            'stack-tech': {
+              id: RootSections[Locale.ES].STACK_TECH,
             },
-            {
-              name: 'Sobre mí',
-              id: RootSections.ABOUT_ME,
+            about: {
+              id: RootSections[Locale.ES].ABOUT_ME,
             },
-          ],
+          },
         },
-      ],
+        [Locale.EN]: {
+          path: '/',
+          sections: {
+            projects: {
+              id: RootSections[Locale.EN].PROJECTS,
+            },
+            'stack-tech': {
+              id: RootSections[Locale.EN].STACK_TECH,
+            },
+            about: {
+              id: RootSections[Locale.EN].ABOUT_ME,
+            },
+          },
+        },
+      },
     }
   );
 };
 
-const pagesConfig: PageConfig = pagesConfigInit();
+const pagesConfig = pagesConfigInit();
 
 export default pagesConfig;

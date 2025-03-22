@@ -1,0 +1,51 @@
+{
+  "SEO_TITLE": "Gustavo Sequeiros - Desarrollador Web",
+  "SEO_DESCRIPTION": "Desarrollador Web Frontend con experiencia en tecnologías como React, NextJS, Astro, TailwindCSS, entre otras.",
+  "HERO": {
+    "SUBTITLE": "Desarrollador Web",
+    "DESCRIPTION": "Estudiante de Ingeniería de Sistemas en la UNSA, Perú. <strong class=\"text-tertiary\">Innovador y detallista.</strong> Entusiasta por empezar nuevos proyectos y enfrentar desafíos."
+  },
+  "NAVBAR": {
+    "PROJECTS": "Proyectos",
+    "STACK_TECH": "Tecnologías",
+    "ABOUT": "Sobre mí",
+    "THEME": {
+      "LIGHT": "Claro",
+      "DARK": "Oscuro",
+      "SYSTEM": "Sistema"
+    }
+  },
+  "PROJECTS": {
+    "TITLE": "Proyectos",
+    "ACM-1": {
+      "TITLE": "ACM UNSA - Capítulo Estudiantil",
+      "DESCRIPTION": "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas."
+    },
+    "ACM-2": {
+      "TITLE": "ACM UNSA - Capítulo Estudiantil",
+      "DESCRIPTION": "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas."
+    },
+    "ACM-3": {
+      "TITLE": "ACM UNSA - Capítulo Estudiantil",
+      "DESCRIPTION": "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas."
+    },
+    "CARD": {
+      "TAGS": {
+        "FRONTEND": "Frontend",
+        "BACKEND": "Backend",
+        "FULLSTACK": "Fullstack",
+        "TEAM_WORK": "Trabajo en equipo"
+      },
+      "PREVIEW": "Visitar",
+      "SOURCE_CODE": "Código",
+      "VISIT": "Visitar"
+    }
+  },
+  "ABOUT": {
+    "TITLE": "Sobre mí",
+    "DESCRIPTION": "Hola, me llamo <strong class=\"text-tertiary\">Luis Gustavo</strong>. Soy desarrollador web enfocado en el front-end y estudiante de <strong class=\"text-tertiary\">Ingeniería de Sistemas</strong> en la Universidad Nacional de San Agustín de Arequipa, en Perú. Me gusta <strong class=\"text-primary-foreground\">innovar y mejorar</strong> los trabajos que realizo. Me esmero por realizarlos bien en cada momento de desarrollo. Disfruto del <strong class=\"text-primary-foreground\">trabajo en equipo</strong>, observo y aprendo lo positivo de cada persona y proyecto para mejorar mis prácticas. Ante los desafíos, investigo, analizo, pido ayuda y <strong class=\"text-primary-foreground\">busco soluciones</strong> de manera proactiva."    
+  },
+  "FOOTER": {
+    "DESCRIPTION": "Desarrollado con <span class=\"text-primary-foreground\">Astro</span>, <span class=\"text-primary-foreground\">Tailwind</span> y <span class=\"text-primary-foreground\">React</span> por <span class=\"text-accent\">@gustadev24</span>."
+  }
+}
