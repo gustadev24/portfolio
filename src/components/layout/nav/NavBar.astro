@@ -42,8 +42,7 @@ const navBarContainerId = "navbar-container";
 
   initSide();
 
-  navBarContainer?.addEventListener("change-navbar-side", (e) => {
-    e.stopPropagation();
+  document.addEventListener("change-navbar-side", (e) => {
     changeNavbarSide(e.detail);
   });
 </script>

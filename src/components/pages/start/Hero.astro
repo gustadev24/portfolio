@@ -36,23 +36,22 @@ const heroId = "hero-section";
   </div>
 </Section>
 
-<script is:inline>
-  const heroId = "hero-section";
-  let heroContainer = document.getElementById(heroId);
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const heroId = "hero-section";
+    let heroContainer = document.getElementById(heroId);
 
-  const callback = ([entry]) => {
-    const isSticky = !entry.isIntersecting;
-    document.dispatchEvent(
-      new CustomEvent("is-navbar-sticky", { detail: isSticky }),
-    );
-  };
+    const callback: IntersectionObserverCallback = ([entry]) => {
+      const isSticky = !entry.isIntersecting;
+      document.dispatchEvent(
+        new CustomEvent("is-navbar-sticky", { detail: isSticky }),
+      );
+    };
 
-  const observer = new IntersectionObserver(callback, { threshold: 0.01 });
-</script>
+    const observer = new IntersectionObserver(callback, { threshold: 0.01 });
+    
+    heroContainer = document.getElementById(heroId);
 
-<script is:inline data-astro-rerun>
-  observer.unobserve(heroContainer);
-  heroContainer = document.getElementById(heroId);
-
-  if (heroContainer) observer.observe(heroContainer);
+    if (heroContainer) observer.observe(heroContainer);
+  });
 </script>

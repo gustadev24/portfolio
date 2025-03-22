@@ -11,20 +11,17 @@ import NavMenuItem from "./NavMenuItem.astro";
 const { currentLocale } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
 ---
+
 <NavItem id={themeUIConfig.label} as="button" class="overflow-visible relative">
   <div class="size-5 overflow-hidden" transition:persist>
     <DesktopIcon id={themes.system.value} class="size-5 theme-icon" />
     <MoonIcon id={themes.dark.value} class="size-5 theme-icon" />
-    <SunIcon id={themes.light.value} class="size-5 theme-icon" />  
+    <SunIcon id={themes.light.value} class="size-5 theme-icon" />
   </div>
-  <NavMenuContainer
-    id={`${themeUIConfig.label}-menu`}
-  >
+  <NavMenuContainer id={`${themeUIConfig.label}-menu`}>
     {
       themeUIConfig.options.map(({ icon: Icon, value }) => (
-        <NavMenuItem
-          data-value={value}
-        >
+        <NavMenuItem data-value={value}>
           <Icon class="size-5" />
           {value === themes.system.value && i18n.NAVBAR.THEME.SYSTEM}
           {value === themes.dark.value && i18n.NAVBAR.THEME.DARK}
@@ -35,43 +32,14 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
   </NavMenuContainer>
 </NavItem>
 <script is:inline>
+  // Script de declaraciones
   const themeMenuId = "change-theme-menu";
   const themeButtonId = "change-theme";
 
-  const themeMenu = document.getElementById(themeMenuId);
-  const themeButton = document.getElementById(themeButtonId);
-  const matchDark = window.matchMedia("(prefers-color-scheme: dark)");
+  let themeMenu = document.getElementById(themeMenuId);
+  let themeButton = document.getElementById(themeButtonId);
+  let matchDark = window.matchMedia("(prefers-color-scheme: dark)");
   let remove = null;
-
-  // abrir y cerrar menú
-  themeButton?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const isClosed = themeMenu?.classList.contains("hidden");
-    if (isClosed) {
-      themeMenu?.classList.remove("hidden");
-      themeMenu?.classList.add("flex-col", "md:flex");
-    } else {
-      themeMenu?.classList.remove("flex-col", "md:flex");
-      themeMenu?.classList.add("hidden");
-    }
-  });
-
-  // click fuera del menú
-  document.addEventListener("click", () => {
-    themeMenu?.classList.add("hidden");
-    themeMenu?.classList.remove("flex-col", "md:flex");
-  });
-  
-  // navbar pegajoso
-  document.addEventListener("is-navbar-sticky", (event) => {
-    if (event.detail) {
-      themeMenu?.classList.remove("md:bottom-12");
-      themeMenu?.classList.add("md:top-12");
-    } else {
-      themeMenu?.classList.add("md:bottom-12");
-      themeMenu?.classList.remove("md:top-12");
-    }
-  });
 
   // ícono de acuerdo al tema
   const updateIcon = (themePreference) => {
@@ -86,8 +54,7 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
       return localStorage.getItem("theme") ?? "system";
     }
 
-    return window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
   };
@@ -107,6 +74,53 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
     updateIcon(themePreference);
     document.documentElement.classList[isDark ? "add" : "remove"]("dark");
   };
+</script>
+
+<script is:inline data-astro-rerun>
+  themeMenu = document.getElementById(themeMenuId);
+  themeButton = document.getElementById(themeButtonId);
+  matchDark = window.matchMedia("(prefers-color-scheme: dark)");
+  remove = null;
+
+  // abrir y cerrar menú
+  themeButton?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isClosed = themeMenu?.classList.contains("hidden");
+    if (isClosed) {
+      themeMenu?.classList.remove("hidden");
+      themeMenu?.classList.add("flex-col", "md:flex");
+    } else {
+      themeMenu?.classList.remove("flex-col", "md:flex");
+      themeMenu?.classList.add("hidden");
+    }
+  });
+
+  // click fuera del menú
+  document.addEventListener("click", () => {
+    themeMenu?.classList.add("hidden");
+    themeMenu?.classList.remove("flex-col", "md:flex");
+  });
+
+  // navbar pegajoso
+  document.addEventListener("is-navbar-sticky", (event) => {
+    if (event.detail) {
+      themeMenu?.classList.remove("md:bottom-12");
+      themeMenu?.classList.add("md:top-12");
+    } else {
+      themeMenu?.classList.add("md:bottom-12");
+      themeMenu?.classList.remove("md:top-12");
+    }
+  });
+
+  document.addEventListener("change-navbar-side", (event) => {
+    if (event.detail === "left") {
+      themeMenu?.classList.remove("right-10");
+      themeMenu?.classList.add("left-10");
+    } else {
+      themeMenu?.classList.add("right-10");
+      themeMenu?.classList.remove("left-10");
+    }
+  });
 
   // Actualizar tema con cada opción
   document.querySelectorAll(".theme-option").forEach((element) => {
@@ -125,5 +139,4 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
   document.addEventListener("astro:after-swap", () => {
     updateTheme();
   });
-
 </script>

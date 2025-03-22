@@ -5,12 +5,6 @@ import NavMenuContainer from "./NavMenuContainer.astro";
 import NavMenuItem from "./NavMenuItem.astro";
 import { ui } from "@i18n/ui";
 import { languages } from "@i18n/ui";
-import { useTranslatedPath, getHashFromUrl } from "@i18n/utils";
-import { DEFAULT_LOCALE, type Locale } from "@i18n/index";
-
-const { url, currentLocale = DEFAULT_LOCALE } = Astro;
-const locale = currentLocale as Locale;
-const translatePath = useTranslatedPath(locale);
 ---
 
 <NavItem id={ui.label} as="button" class="overflow-visible relative">
@@ -22,47 +16,86 @@ const translatePath = useTranslatedPath(locale);
   <NavMenuContainer id={`${ui.label}-menu`}>
     {
       Object.values(languages).map(({ code, name }) => (
-        <NavMenuItem>
-          <a href={translatePath(getHashFromUrl(url, locale), code)}>{name}</a>
+        <NavMenuItem role="button" class="language-option" data-locale={code}>
+          {name}
         </NavMenuItem>
       ))
     }
   </NavMenuContainer>
 </NavItem>
 <script>
-  const languageMenuId = "change-language-menu";
-  const languageButtonId = "change-language";
+  import type { Locale } from "@i18n/index";
+  import { useTranslatedPath, getLangFromPathname } from "@i18n/utils";
+  import { navigate } from "astro:transitions/client";
+  document.addEventListener("astro:page-load", () => {
+    const languageMenuId = "change-language-menu";
+    const languageButtonId = "change-language";
 
-  const languageMenu = document.getElementById(languageMenuId);
-  const languageButton = document.getElementById(languageButtonId);
+    const languageMenu = document.getElementById(languageMenuId);
+    const languageButton = document.getElementById(languageButtonId);
+    const locale = getLangFromPathname(window.location.pathname);
 
-  // abrir y cerrar menú
-  languageButton?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const isClosed = languageMenu?.classList.contains("hidden");
-    if (isClosed) {
-      languageMenu?.classList.remove("hidden");
-      languageMenu?.classList.add("flex-col", "md:flex");
-    } else {
-      languageMenu?.classList.remove("flex-col", "md:flex");
+    const translatePath = useTranslatedPath(locale);
+
+    const changeLanguage = (locale: Locale) => {
+      const newPath = translatePath(window.location.pathname, locale);
+      navigate(newPath);
+    };
+
+    const toggleMenu = (e: Event) => {
+      e.stopPropagation();
+      const isClosed = languageMenu?.classList.contains("hidden");
+      if (isClosed) {
+        languageMenu?.classList.remove("hidden");
+        languageMenu?.classList.add("flex-col", "md:flex");
+      } else {
+        languageMenu?.classList.remove("flex-col", "md:flex");
+        languageMenu?.classList.add("hidden");
+      }
+    };
+    document.querySelectorAll(".language-option").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const locale = button.getAttribute("data-locale") as Locale;
+        changeLanguage(locale);
+      });
+    });
+    // abrir y cerrar menú
+    languageButton?.addEventListener("click", toggleMenu);
+
+    // click fuera del menú
+    document.addEventListener("click", () => {
       languageMenu?.classList.add("hidden");
-    }
-  });
+      languageMenu?.classList.remove("flex-col", "md:flex");
+    });
 
-  // click fuera del menú
-  document.addEventListener("click", () => {
-    languageMenu?.classList.add("hidden");
-    languageMenu?.classList.remove("flex-col", "md:flex");
+    // navbar pegajoso
+    document.addEventListener("is-navbar-sticky", ((event: CustomEvent) => {
+      if (event.detail) {
+        languageMenu?.classList.remove("md:bottom-12");
+        languageMenu?.classList.add("md:top-12");
+      } else {
+        languageMenu?.classList.add("md:bottom-12");
+        languageMenu?.classList.remove("md:top-12");
+      }
+    }) as EventListener);
   });
+</script>
 
-  // navbar pegajoso
-  document.addEventListener("is-navbar-sticky", ((event: CustomEvent) => {
-    if (event.detail) {
-      languageMenu?.classList.remove("md:bottom-12");
-      languageMenu?.classList.add("md:top-12");
+<script is:inline>
+  const languageMenuId = "change-language-menu";
+  let languageMenu = document.getElementById(languageMenuId);
+</script>
+
+<script is:inline data-astro-rerun>
+  languageMenu = document.getElementById(languageMenuId);
+  document.addEventListener("change-navbar-side", (event) => {
+    if (event.detail === "left") {
+      languageMenu?.classList.remove("right-10");
+      languageMenu?.classList.add("left-10");
     } else {
-      languageMenu?.classList.add("md:bottom-12");
-      languageMenu?.classList.remove("md:top-12");
+      languageMenu?.classList.add("right-10");
+      languageMenu?.classList.remove("left-10");
     }
-  }) as EventListener);
+  });
 </script>
