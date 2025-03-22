@@ -10,7 +10,7 @@ export const RootSections = {
   [Locale.EN]: {
     PROJECTS: 'projects',
     STACK_TECH: 'stack-tech',
-    ABOUT_ME: 'about-me',
+    ABOUT_ME: 'about',
   },
 }
 

@@ -27,10 +27,10 @@ export function getHashFromUrl(url: URL, lang: Locale) { // #sobre-mí lang: es
 export function useTranslatedPath(lang: Locale) { // en /en#about
   return function translatePath(path: string, l: Locale = lang) { // es
     const hash: HashRootRoutes = path.split('#').at(1) as HashRootRoutes;
-    const langRoute = l === DEFAULT_LOCALE ? '/' : `/${l}`;
+    const langRoute = l === DEFAULT_LOCALE ? '' : `/${l}/`;
     console.log("langRoute value from useTranslatedPath", langRoute);
     if (!hash) {
-      return langRoute;
+      return langRoute ? langRoute : '/';
     }
     const translatedHash = pagesConfig.pages[l].sections[hash].id;
     return `${langRoute}#${translatedHash}`;
