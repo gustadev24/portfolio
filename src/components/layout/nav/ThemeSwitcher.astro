@@ -68,7 +68,6 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
     remove = () => matchDark.removeEventListener("change", updateTheme);
 
     const themePreference = getThemePreference();
-    console.log("Theme preference in updateTheme: ", themePreference);
     const isDark =
       themePreference === "dark" ||
       (themePreference === "system" && matchDark.matches);
@@ -77,10 +76,8 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
   };
 
   document.addEventListener("astro:after-swap", () => {
-    console.log("Despies del cambio de tema");
     updateTheme();
   });
-  console.log("Primera actualizacion de tema");
   updateTheme();
 </script>
 
@@ -134,7 +131,6 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
     element.addEventListener("click", (e) => {
       e.stopPropagation();
       localStorage.setItem("theme", e.target.dataset.value || "");
-      console.log("Valor de la opción: ", e.target);
       updateTheme();
       themeMenu?.classList.add("hidden");
       themeMenu?.classList.remove("flex-col", "md:flex");
