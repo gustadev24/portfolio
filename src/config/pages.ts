@@ -4,8 +4,8 @@ import { SITE_URL } from "./variable";
 export const RootSections = {
   [Locale.ES]: {
     PROJECTS: 'proyectos',
-    STACK_TECH: 'tecnologías',
-    ABOUT_ME: 'sobre-mí',
+    STACK_TECH: 'tecnologias',
+    ABOUT_ME: 'sobre-mi',
   },
   [Locale.EN]: {
     PROJECTS: 'projects',
