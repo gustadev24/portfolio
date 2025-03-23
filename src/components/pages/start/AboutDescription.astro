@@ -12,4 +12,4 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
 const { class: className } = Astro.props;
 ---
 
-<div class={cn("shadow-container bg-secondary/35 rounded-xl p-5 text-2xl", className)} set:html={i18n.ABOUT.DESCRIPTION} />
+<div class={cn("shadow-container bg-secondary/35 rounded-xl p-5 text-lg md:text-2xl", className)} set:html={i18n.ABOUT.DESCRIPTION} />

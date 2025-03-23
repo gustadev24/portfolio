@@ -17,17 +17,17 @@
   },
   "PROJECTS": {
     "TITLE": "Projects",
-    "ACM-1": {
+    "ACM": {
       "TITLE": "ACM UNSA - Student Chapter",
       "DESCRIPTION": "Landing with information about the Student Chapter of the ACM at its UNSA headquarters. Developed from scratch and open source in a team of two."
     },
-    "ACM-2": {
-      "TITLE": "ACM UNSA - Student Chapter",
-      "DESCRIPTION": "Landing with information about the Student Chapter of the ACM at its UNSA headquarters. Developed from scratch and open source in a team of two."
+    "EXOPLANETS": {
+      "TITLE": "Exoplanets",
+      "DESCRIPTION": "Desktop application that simulates space from an exoplanet. Developed in a team. I was in charge of the front-end design and implementation and the integration of the NASA API into the interface."
     },
-    "ACM-3": {
-      "TITLE": "ACM UNSA - Student Chapter",
-      "DESCRIPTION": "Landing with information about the Student Chapter of the ACM at its UNSA headquarters. Developed from scratch and open source in a team of two."
+    "KNOWLEDGE_WARDENS": {
+      "TITLE": "Knowledge Wardens",
+      "DESCRIPTION": "Educational platform for teaching programming and technology. Developed in a team for the Midudev hackathon sponsored by vercel. I was in charge of the implementation of the interface and a bit of design. Also the integration of the game in the web application."
     },
     "CARD": {
       "TAGS": {
@@ -49,6 +49,6 @@
     "DESCRIPTION": "Hello, my name is <strong class=\"text-tertiary\">Luis Gustavo</strong>. I am a web developer focused on the front-end and a student of <strong class=\"text-tertiary\">Systems Engineering</strong> at the National University of San Agustín de Arequipa, in Peru. I like <strong class=\"text-primary-foreground\">innovating and improving</strong> the work I do. I strive to do them well at every stage of development. I enjoy <strong class=\"text-primary-foreground\">teamwork</strong>, I observe and learn the positive aspects of each person and project to improve my practices. Faced with challenges, I investigate, analyze, ask for help and <strong class=\"text-primary-foreground\">seek solutions</strong> proactively."
   },
   "FOOTER": {
-    "DESCRIPTION": "Developed with <span class=\"text-primary-foreground\">Astro</span>, <span class=\"text-primary-foreground\">Tailwind</span> and <span class=\"text-primary-foreground\">React</span> by <span class=\"text-accent\">@gustadev24</span>."
+    "DESCRIPTION": "Developed with <span class=\"text-primary-foreground\">Astro</span> and <span class=\"text-primary-foreground\">Tailwind</span> by <span class=\"text-accent\">@gustadev24</span>."
   }
 }

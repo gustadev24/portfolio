@@ -17,17 +17,17 @@
   },
   "PROJECTS": {
     "TITLE": "Proyectos",
-    "ACM-1": {
+    "ACM": {
       "TITLE": "ACM UNSA - Capítulo Estudiantil",
       "DESCRIPTION": "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas."
     },
-    "ACM-2": {
-      "TITLE": "ACM UNSA - Capítulo Estudiantil",
-      "DESCRIPTION": "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas."
+    "EXOPLANETS": {
+      "TITLE": "Exoplanets",
+      "DESCRIPTION": "Aplicación de escritorio que simula el espacio desde un exoplaneta. Desarrollado en equipo. Me encargué del diseño e implementación front-end y de la integración de la API de la NASA en la interfaz."
     },
-    "ACM-3": {
-      "TITLE": "ACM UNSA - Capítulo Estudiantil",
-      "DESCRIPTION": "Landing con información acerca del Capítulo Estudiantil de la ACM en su sede UNSA. Desarrollado desde cero y de código abierto en equipo de dos personas."
+    "KNOWLEDGE_WARDENS": {
+      "TITLE": "Knowledge Wardens",
+      "DESCRIPTION": "Plataforma educativa para la enseñanza de programación y tecnología. Desarrollado en equipo para la hackaton de Midudev patrocinada por vercel. Me encargue de la implementación de la interfaz y un poco de diseño. Asimismo de la integración del juego en la aplicación web."
     },
     "CARD": {
       "TAGS": {
@@ -46,9 +46,9 @@
   },
   "ABOUT": {
     "TITLE": "Sobre mí",
-    "DESCRIPTION": "Hola, me llamo <strong class=\"text-tertiary\">Luis Gustavo</strong>. Soy desarrollador web enfocado en el front-end y estudiante de <strong class=\"text-tertiary\">Ingeniería de Sistemas</strong> en la Universidad Nacional de San Agustín de Arequipa, en Perú. Me gusta <strong class=\"text-primary-foreground\">innovar y mejorar</strong> los trabajos que realizo. Me esmero por realizarlos bien en cada momento de desarrollo. Disfruto del <strong class=\"text-primary-foreground\">trabajo en equipo</strong>, observo y aprendo lo positivo de cada persona y proyecto para mejorar mis prácticas. Ante los desafíos, investigo, analizo, pido ayuda y <strong class=\"text-primary-foreground\">busco soluciones</strong> de manera proactiva."    
+    "DESCRIPTION": "Hola, me llamo <strong class=\"text-tertiary\">Luis Gustavo</strong>. Soy desarrollador web enfocado en el front-end y estudiante de <strong class=\"text-tertiary\">Ingeniería de Sistemas</strong> en la Universidad Nacional de San Agustín de Arequipa, en Perú. Me gusta <strong class=\"text-primary-foreground\">innovar y mejorar</strong> los trabajos que realizo. Me esmero por realizarlos bien en cada momento de desarrollo. Disfruto del <strong class=\"text-primary-foreground\">trabajo en equipo</strong>, observo y aprendo lo positivo de cada persona y proyecto para mejorar mis prácticas. Ante los desafíos, investigo, analizo, pido ayuda y <strong class=\"text-primary-foreground\">busco soluciones</strong> de manera proactiva."
   },
   "FOOTER": {
-    "DESCRIPTION": "Desarrollado con <span class=\"text-primary-foreground\">Astro</span>, <span class=\"text-primary-foreground\">Tailwind</span> y <span class=\"text-primary-foreground\">React</span> por <span class=\"text-accent\">@gustadev24</span>."
+    "DESCRIPTION": "Desarrollado con <span class=\"text-primary-foreground\">Astro</span> y <span class=\"text-primary-foreground\">Tailwind</span> por <span class=\"text-accent\">@gustadev24</span>."
   }
 }

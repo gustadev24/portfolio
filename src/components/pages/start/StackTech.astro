@@ -5,6 +5,12 @@ import Title from "@components/ui/Title.astro";
 import StackIcon from "@assets/icons/stack.svg";
 import TailwindLogo from "@assets/icons/tailwindcss.svg";
 import NextJSLogo from "@assets/icons/nextjs.svg";
+import ReactLogo from "@assets/icons/react.svg";
+import MotionLogo from "@assets/icons/motion.svg";
+import UnityLogo from "@assets/icons/unity.svg";
+import SupabaseLogo from "@assets/icons/supabase.svg";
+import VercelLogo from "@assets/icons/vercel.svg";
+import AstroLogo from "@assets/icons/astro.svg";
 import { RootSections } from "@config/pages";
 import TechItem from "./TechItem.astro";
 import { DEFAULT_LOCALE, getI18n, Locale } from "@i18n/index";
@@ -17,14 +23,43 @@ const techs: TechType[] = [
     content: "Tailwind CSS",
     class: "bg-[#003159]",
     icon: TailwindLogo,
-    iconClass: "size-14",
   },
   {
     content: "Next JS",
     class: "bg-black",
     icon: NextJSLogo,
-    iconClass: "size-14",
   },
+  {
+    content: "React",
+    class: "bg-[#23272F]",
+    icon: ReactLogo,
+  },
+  {
+    content: "Motion",
+    class: "bg-[#1A202C]",
+    icon: MotionLogo,
+  },
+  {
+    content: "Unity",
+    class: "bg-black",
+    icon: UnityLogo,
+  },
+  {
+    content: "Supabase",
+    class: "bg-[#1A202C]",
+    icon: SupabaseLogo,
+  },
+  {
+    content: "Vercel",
+    class: "bg-black",
+    icon: VercelLogo,
+  },
+  {
+    content: "Astro",
+    class: "bg-black",
+    icon: AstroLogo,
+  }
+
 ];
 ---
 
@@ -37,7 +72,7 @@ const techs: TechType[] = [
     {
       techs.map(({ content, class: className, icon: Icon, iconClass}) => (
         <TechItem info={content} class={className}>
-          <Icon class={iconClass} />
+          <Icon class:list={["size-full", iconClass]} />
         </TechItem>
       ))
     }
