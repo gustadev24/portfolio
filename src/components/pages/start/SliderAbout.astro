@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import ChevronLeftIcon from "@assets/icons/chevron-left.svg";
-import BottomLeft from "@assets/images/bottom-left.png";
-import BottomRight from "@assets/images/bottom-right.png";
-import TopRight from "@assets/images/top-right.png";
+import BottomLeft from "@assets/images/bottom-left.webp";
+import BottomRight from "@assets/images/bottom-right.webp";
+import TopRight from "@assets/images/top-right.webp";
 import AboutDescription from "./AboutDescription.astro";
 import Button from "@components/ui/Button.astro";
 
@@ -69,46 +69,48 @@ const containerSliderId = "container-slider";
 </article>
 
 <script>
-  const leftButtonId = "left-button";
-  const rightButtonId = "right-button";
-  const containerSliderId = "container-slider";
+  document.addEventListener("astro:page-load", () => {
+    const leftButtonId = "left-button";
+    const rightButtonId = "right-button";
+    const containerSliderId = "container-slider";
 
-  let scrollEnd = false;
-  let scrollStart = true;
+    let scrollEnd = false;
+    let scrollStart = true;
 
-  const leftButton = document.getElementById(leftButtonId);
-  const rightButton = document.getElementById(rightButtonId);
-  const containerSlider = document.getElementById(containerSliderId);
+    const leftButton = document.getElementById(leftButtonId);
+    const rightButton = document.getElementById(rightButtonId);
+    const containerSlider = document.getElementById(containerSliderId);
 
-  leftButton?.addEventListener("click", () => {
-    if (containerSlider) {
-      let move = -containerSlider.offsetWidth;
-      if (scrollStart) {
-        move = containerSlider.scrollWidth - containerSlider.offsetWidth;
+    leftButton?.addEventListener("click", () => {
+      if (containerSlider) {
+        let move = -containerSlider.offsetWidth;
+        if (scrollStart) {
+          move = containerSlider.scrollWidth - containerSlider.offsetWidth;
+        }
+        containerSlider.scrollBy({
+          left: move,
+          behavior: "smooth",
+        });
       }
-      containerSlider.scrollBy({
-        left: move,
-        behavior: "smooth",
-      });
-    }
-  });
+    });
 
-  rightButton?.addEventListener("click", () => {
-    if (containerSlider) {
-      let move = containerSlider.offsetWidth;
-      if (scrollEnd) {
-        move = -containerSlider.scrollWidth + containerSlider.offsetWidth;
+    rightButton?.addEventListener("click", () => {
+      if (containerSlider) {
+        let move = containerSlider.offsetWidth;
+        if (scrollEnd) {
+          move = -containerSlider.scrollWidth + containerSlider.offsetWidth;
+        }
+        containerSlider.scrollBy({
+          left: move,
+          behavior: "smooth",
+        });
       }
-      containerSlider.scrollBy({
-        left: move,
-        behavior: "smooth",
-      });
-    }
-  });
+    });
 
-  containerSlider?.addEventListener("scroll", () => {
-    const { scrollLeft, scrollWidth, offsetWidth } = containerSlider;
-    scrollStart = scrollLeft === 0;
-    scrollEnd = scrollLeft + offsetWidth >= scrollWidth;
+    containerSlider?.addEventListener("scroll", () => {
+      const { scrollLeft, scrollWidth, offsetWidth } = containerSlider;
+      scrollStart = scrollLeft === 0;
+      scrollEnd = scrollLeft + offsetWidth >= scrollWidth;
+    });
   });
 </script>

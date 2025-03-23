@@ -16,22 +16,22 @@ type Props = ProjectCardType;
 const { img, title, tags, description, github, preview } = Astro.props;
 ---
 
-<article class="flex flex-col p-6 space-between gap-10 bg-secondary/35 rounded-2xl shadow-container">
-  <div class="flex flex-col gap-5">
+<article class="flex flex-col p-6 justify-between gap-10 bg-secondary/35 rounded-2xl shadow-container">
+  <div class="flex flex-col gap-6">
     <a href={preview || github} class="rounded-2xl overflow-clip relative group">
-      <Image src={img} alt={title} />
+      <Image src={img} alt={title} class="h-60 object-cover transition-transform group-hover:scale-110" />
       <div class="absolute inset-0 flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 z-10 bg-radial from-[#000000cc] to-[#232323cc] transition-opacity text-md text-secondary-foreground">
         {i18n.PROJECTS.CARD.VISIT}
         <NewTabIcon class="size-3 fill-secondary-foreground" />
       </div>
     </a>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-4">
       <h3 class="text-3xl text-primary-foreground font-primary">{title}</h3>
       <div class="flex flex-wrap gap-x-2 gap-y-1">
         {
           tags.map(({ icon: Icon, content, class: className, iconClass }) => (
             <Tag class={className}>
-              {Icon && <Icon slot="icon" class={iconClass} />}
+              {Icon && <Icon slot="icon" class:list={["w-4", iconClass]} />}
               {content}
             </Tag>
           ))
