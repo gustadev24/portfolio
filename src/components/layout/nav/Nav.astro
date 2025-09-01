@@ -63,7 +63,7 @@ const navItems = translatedIdSections.map(({ id }) => {
     const sections = document.querySelectorAll("section");
     const navItems = document.querySelectorAll("nav a");
     const intersectClass =
-      "text-accent bg-radial from-accent/15 to-transparent to-70%";
+      ["text-accent", "bg-radial", "from-accent/15", "to-transparent", "to-70%"];
 
     const callback: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
@@ -71,10 +71,10 @@ const navItems = translatedIdSections.map(({ id }) => {
           navItems.forEach((item) => {
             const icon = item.querySelector("svg");
             if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add(...intersectClass.split(" "));
+              item.classList.add(...intersectClass);
               icon?.classList.add("stroke-accent");
             } else {
-              item.classList.remove(...intersectClass.split(" "));
+              item.classList.remove(...intersectClass);
               icon?.classList.remove("stroke-accent");
             }
           });
@@ -84,8 +84,8 @@ const navItems = translatedIdSections.map(({ id }) => {
 
     const observer = new IntersectionObserver(callback, {
       root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
+      rootMargin: "0px 0px -200px 0px",
+      threshold: 0,
     });
 
     sections.forEach((section) => {
