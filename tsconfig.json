@@ -5,33 +5,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@ui/*": [
-        "src/components/ui/*"
-      ],
-      "@layouts/*": [
-        "src/layouts/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ],
-      "@lib/*": [
-        "src/lib/*"
-      ],
-      "@types": [
-        "src/types.d.ts"
-      ],
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "@i18n/*": [
-        "src/i18n/*"
-      ],
-      "@config/*": [
-        "src/config/*"
-      ]
+      "@/*": ["./src/*"],
     },
     "plugins": [
       {

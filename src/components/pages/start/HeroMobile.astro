@@ -1,20 +1,24 @@
 ---
-import SocialButtons from "@components/SocialButtons.astro";
-import Section from "@components/ui/Section.astro";
-import { Image } from "astro:assets";
-import heroImage from "@assets/images/gustadev.webp";
-import { getI18n, Locale } from "@i18n/index";
+import SocialButtons from '@/components/SocialButtons.astro';
+import Section from '@/components/ui/Section.astro';
+import { Image } from 'astro:assets';
+import heroImage from '@/assets/images/gustadev.webp';
+import { getI18n, Locale } from '@/i18n/index';
 
 const { currentLocale } = Astro;
-const i18n = getI18n({ currentLocale: currentLocale as Locale});
+const i18n = getI18n({ currentLocale: currentLocale as Locale });
 ---
 
 <Section class="flex-col justify-between gap-14 items-center md:hidden">
   <div class="flex flex-col gap-5 items-center">
-    <h1 class="text-primary-foreground text-6xl font-primary font-medium text-center">
+    <h1
+      class="text-primary-foreground text-6xl font-primary font-medium text-center"
+    >
       Gustavo Sequeiros
     </h1>
-    <h3 class="text-tertiary text-4xl font-primary text-center">{i18n.HERO.SUBTITLE}</h3>
+    <h3 class="text-tertiary text-4xl font-primary text-center">
+      {i18n.HERO.SUBTITLE}
+    </h3>
   </div>
   <div class="flex flex-col gap-5">
     <SocialButtons />
@@ -25,5 +29,7 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale});
     />
   </div>
   <article
-    class="bg-secondary/15 text-secondary-foreground p-3 text-xl text-pretty shadow-container shadow-secondary/40 rounded-2xl max-w-md" set:html={i18n.HERO.DESCRIPTION}>
+    class="bg-secondary/15 text-secondary-foreground p-3 text-xl text-pretty shadow-container shadow-secondary/40 rounded-2xl max-w-md"
+    set:html={i18n.HERO.DESCRIPTION}
+  />
 </Section>

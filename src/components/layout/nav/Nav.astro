@@ -1,12 +1,12 @@
 ---
-import NavItem from "./NavItem.astro";
-import CodeIcon from "@assets/icons/code.svg";
-import StackIcon from "@assets/icons/stack.svg";
-import PersonIcon from "@assets/icons/person.svg";
-import pagesConfig from "@config/pages";
-import { RootSections } from "@config/pages";
-import { DEFAULT_LOCALE, getI18n, Locale } from "@i18n/index";
-import { useTranslatedPath } from "@i18n/utils";
+import NavItem from './NavItem.astro';
+import CodeIcon from '@/assets/icons/code.svg';
+import StackIcon from '@/assets/icons/stack.svg';
+import PersonIcon from '@/assets/icons/person.svg';
+import pagesConfig from '@/config/pages';
+import { RootSections } from '@/config/pages';
+import { DEFAULT_LOCALE, getI18n, Locale } from '@/i18n/index';
+import { useTranslatedPath } from '@/i18n/utils';
 
 const { currentLocale = DEFAULT_LOCALE } = Astro;
 const locale = currentLocale as Locale;
@@ -23,21 +23,21 @@ const navItems = translatedIdSections.map(({ id }) => {
     case RootSections[locale].ABOUT_ME:
       iconSection = {
         component: PersonIcon,
-        class: "size-5 group-hover:stroke-accent",
+        class: 'size-5 group-hover:stroke-accent',
       };
       name = i18n.NAVBAR.ABOUT;
       break;
     case RootSections[locale].STACK_TECH:
       iconSection = {
         component: StackIcon,
-        class: "size-5 group-hover:stroke-accent",
+        class: 'size-5 group-hover:stroke-accent',
       };
       name = i18n.NAVBAR.STACK_TECH;
       break;
     default:
       iconSection = {
         component: CodeIcon,
-        class: "size-5 group-hover:stroke-accent",
+        class: 'size-5 group-hover:stroke-accent',
       };
       name = i18n.NAVBAR.PROJECTS;
   }
@@ -59,23 +59,28 @@ const navItems = translatedIdSections.map(({ id }) => {
 </nav>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const sections = document.querySelectorAll("section");
-    const navItems = document.querySelectorAll("nav a");
-    const intersectClass =
-      ["text-accent", "bg-radial", "from-accent/15", "to-transparent", "to-70%"];
+  document.addEventListener('astro:page-load', () => {
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('nav a');
+    const intersectClass = [
+      'text-accent',
+      'bg-radial',
+      'from-accent/15',
+      'to-transparent',
+      'to-70%',
+    ];
 
     const callback: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           navItems.forEach((item) => {
-            const icon = item.querySelector("svg");
-            if (item.getAttribute("aria-label") == entry.target.id) {
+            const icon = item.querySelector('svg');
+            if (item.getAttribute('aria-label') == entry.target.id) {
               item.classList.add(...intersectClass);
-              icon?.classList.add("stroke-accent");
+              icon?.classList.add('stroke-accent');
             } else {
               item.classList.remove(...intersectClass);
-              icon?.classList.remove("stroke-accent");
+              icon?.classList.remove('stroke-accent');
             }
           });
         }
@@ -84,7 +89,7 @@ const navItems = translatedIdSections.map(({ id }) => {
 
     const observer = new IntersectionObserver(callback, {
       root: null,
-      rootMargin: "0px 0px -200px 0px",
+      rootMargin: '0px 0px -200px 0px',
       threshold: 0,
     });
 
@@ -93,7 +98,7 @@ const navItems = translatedIdSections.map(({ id }) => {
     });
 
     document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
+      if (document.visibilityState === 'hidden') {
         observer.disconnect();
       } else {
         sections.forEach((section) => {

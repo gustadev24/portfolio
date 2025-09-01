@@ -1,11 +1,11 @@
 ---
-import Section from "@components/ui/Section.astro";
-import Title from "@components/ui/Title.astro";
-import CodeIcon from "@assets/icons/code.svg";
-import ProjectCard from "./ProjectCard.astro";
-import { RootSections } from "@config/pages";
-import { getI18n, Locale } from "@i18n/index";
-import { genProjects } from "@lib/projects";
+import Section from '@/components/ui/Section.astro';
+import Title from '@/components/ui/Title.astro';
+import CodeIcon from '@/assets/icons/code.svg';
+import ProjectCard from './ProjectCard.astro';
+import { RootSections } from '@/config/pages';
+import { getI18n, Locale } from '@/i18n/index';
+import { genProjects } from '@/lib/projects';
 
 const { currentLocale } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
@@ -17,11 +17,9 @@ const projects = genProjects(i18n);
     <CodeIcon class="size-10 stroke-primary-foreground" />
     {i18n.PROJECTS.TITLE}
   </Title>
-  <div class="grid grid-cols-1 md:grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))] auto-rows-auto gap-x-10 gap-y-12   ">
-    {
-      projects.map((project) => (
-        <ProjectCard {...project} />
-      ))
-    }
+  <div
+    class="grid grid-cols-1 md:grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))] auto-rows-auto gap-x-10 gap-y-12"
+  >
+    {projects.map((project) => <ProjectCard {...project} />)}
   </div>
 </Section>

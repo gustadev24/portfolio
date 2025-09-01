@@ -1,8 +1,8 @@
 ---
-import Custom from "./Custom.astro";
-import Nav from "./Nav.astro";
+import Custom from './Custom.astro';
+import Nav from './Nav.astro';
 
-const navBarContainerId = "navbar-container";
+const navBarContainerId = 'navbar-container';
 ---
 
 <div
@@ -13,36 +13,28 @@ const navBarContainerId = "navbar-container";
   <Custom />
 </div>
 
-<script is:inline>
-  // Script de delaraciones
-  const navBarContainerId = "navbar-container";
-
-  let navBarContainer = document.getElementById(navBarContainerId);
+<script is:inline data-astro-rerun>
+  const navBarContainerId = 'navbar-container';
+  const navBarContainer = document.getElementById(navBarContainerId);
 
   const changeNavbarSide = (side) => {
-    if (side === "left") {
-      navBarContainer.classList.remove("right-2");
-      navBarContainer.classList.add("left-2");
+    if (side === 'left') {
+      navBarContainer.classList.remove('right-2');
+      navBarContainer.classList.add('left-2');
     } else {
-      navBarContainer.classList.remove("left-2");
-      navBarContainer.classList.add("right-2");
+      navBarContainer.classList.remove('left-2');
+      navBarContainer.classList.add('right-2');
     }
   };
 
   const initSide = () => {
-    const sidePreference = localStorage.getItem("navbar-side") ?? "right";
+    const sidePreference = localStorage.getItem('navbar-side') ?? 'right';
     changeNavbarSide(sidePreference);
   };
-</script>
-
-<script is:inline data-astro-rerun>
-
-  navBarContainer = document.getElementById(navBarContainerId);
-
 
   initSide();
 
-  document.addEventListener("change-navbar-side", (e) => {
+  document.addEventListener('change-navbar-side', (e) => {
     changeNavbarSide(e.detail);
   });
 </script>

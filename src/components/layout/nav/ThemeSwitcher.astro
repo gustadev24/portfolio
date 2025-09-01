@@ -1,12 +1,12 @@
 ---
-import DesktopIcon from "@assets/icons/desktop.svg";
-import MoonIcon from "@assets/icons/moon.svg";
-import SunIcon from "@assets/icons/sun.svg";
-import { themeUIConfig, themes } from "@config/theme";
-import NavItem from "./NavItem.astro";
-import { getI18n, Locale } from "@i18n/index";
-import NavMenuContainer from "./NavMenuContainer.astro";
-import NavMenuItem from "./NavMenuItem.astro";
+import DesktopIcon from '@/assets/icons/desktop.svg';
+import MoonIcon from '@/assets/icons/moon.svg';
+import SunIcon from '@/assets/icons/sun.svg';
+import { themeUIConfig, themes } from '@/config/theme';
+import NavItem from './NavItem.astro';
+import { getI18n, Locale } from '@/i18n/index';
+import NavMenuContainer from './NavMenuContainer.astro';
+import NavMenuItem from './NavMenuItem.astro';
 
 const { currentLocale } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
@@ -31,32 +31,32 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
     }
   </NavMenuContainer>
 </NavItem>
-<script is:inline>
-  // Script de declaraciones
-  const themeMenuId = "change-theme-menu";
-  const themeButtonId = "change-theme";
 
-  let themeMenu = document.getElementById(themeMenuId);
-  let themeButton = document.getElementById(themeButtonId);
-  let matchDark = window.matchMedia("(prefers-color-scheme: dark)");
+<script is:inline data-astro-rerun>
+  const themeMenuId = 'change-theme-menu';
+  const themeButtonId = 'change-theme';
+
+  const themeMenu = document.getElementById(themeMenuId);
+  const themeButton = document.getElementById(themeButtonId);
+  const matchDark = window.matchMedia('(prefers-color-scheme: dark)');
   let remove = null;
 
   // ícono de acuerdo al tema
   const updateIcon = (themePreference) => {
-    document.querySelectorAll(".theme-icon").forEach((element) => {
-      element.style.display = element.id === themePreference ? "flex" : "none";
+    document.querySelectorAll('.theme-icon').forEach((element) => {
+      element.style.display = element.id === themePreference ? 'flex' : 'none';
     });
   };
 
   // obtener tema del almacenamiento o del sistema
   const getThemePreference = () => {
-    if (typeof localStorage !== "undefined") {
-      return localStorage.getItem("theme") || "system";
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('theme') || 'system';
     }
 
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
   };
 
   // Actualizar icono y escuchar cambios de tema desde el sistema operativo o navegador
@@ -64,76 +64,73 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
     if (remove != null) {
       remove();
     }
-    matchDark.addEventListener("change", updateTheme);
-    remove = () => matchDark.removeEventListener("change", updateTheme);
+    matchDark.addEventListener('change', updateTheme);
+    remove = () => matchDark.removeEventListener('change', updateTheme);
 
     const themePreference = getThemePreference();
     const isDark =
-      themePreference === "dark" ||
-      (themePreference === "system" && matchDark.matches);
+      themePreference === 'dark' ||
+      (themePreference === 'system' && matchDark.matches);
     updateIcon(themePreference);
-    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+    document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
   };
 
-  document.addEventListener("astro:after-swap", () => {
+  document.addEventListener('astro:after-swap', () => {
     updateTheme();
   });
   updateTheme();
-</script>
-
-<script is:inline data-astro-rerun>
   themeMenu = document.getElementById(themeMenuId);
   themeButton = document.getElementById(themeButtonId);
-  matchDark = window.matchMedia("(prefers-color-scheme: dark)");
+  matchDark = window.matchMedia('(prefers-color-scheme: dark)');
 
   // abrir y cerrar menú
-  themeButton?.addEventListener("click", (e) => {
+  themeButton?.addEventListener('click', (e) => {
     e.stopPropagation();
-    const isClosed = themeMenu?.classList.contains("hidden");
+    const isClosed = themeMenu?.classList.contains('hidden');
     if (isClosed) {
-      themeMenu?.classList.remove("hidden");
-      themeMenu?.classList.add("flex-col", "md:flex");
+      themeMenu?.classList.remove('hidden');
+      themeMenu?.classList.add('flex-col', 'md:flex');
     } else {
-      themeMenu?.classList.remove("flex-col", "md:flex");
-      themeMenu?.classList.add("hidden");
+      themeMenu?.classList.remove('flex-col', 'md:flex');
+      themeMenu?.classList.add('hidden');
     }
   });
 
   // click fuera del menú
-  document.addEventListener("click", () => {
-    themeMenu?.classList.add("hidden");
-    themeMenu?.classList.remove("flex-col", "md:flex");
+  document.addEventListener('click', () => {
+    themeMenu?.classList.add('hidden');
+    themeMenu?.classList.remove('flex-col', 'md:flex');
   });
 
   // navbar pegajoso
-  document.addEventListener("is-navbar-sticky", (event) => {
+  document.addEventListener('is-navbar-sticky', (event) => {
     if (event.detail) {
-      themeMenu?.classList.remove("md:bottom-12");
-      themeMenu?.classList.add("md:top-12");
+      themeMenu?.classList.remove('md:bottom-12');
+      themeMenu?.classList.add('md:top-12');
     } else {
-      themeMenu?.classList.add("md:bottom-12");
-      themeMenu?.classList.remove("md:top-12");
+      themeMenu?.classList.add('md:bottom-12');
+      themeMenu?.classList.remove('md:top-12');
     }
   });
 
-  document.addEventListener("change-navbar-side", (event) => {
-    if (event.detail === "left") {
-      themeMenu?.classList.remove("right-10");
-      themeMenu?.classList.add("left-10");
+  document.addEventListener('change-navbar-side', (event) => {
+    if (event.detail === 'left') {
+      themeMenu?.classList.remove('right-10');
+      themeMenu?.classList.add('left-10');
     } else {
-      themeMenu?.classList.add("right-10");
-      themeMenu?.classList.remove("left-10");
+      themeMenu?.classList.add('right-10');
+      themeMenu?.classList.remove('left-10');
     }
   });
 
   // Actualizar tema con cada opción
-  document.querySelectorAll(".theme-option").forEach((element) => {
-    element.addEventListener("click", (e) => {
+  document.querySelectorAll('.theme-option').forEach((element) => {
+    element.addEventListener('click', (e) => {
       e.stopPropagation();
-      localStorage.setItem("theme", e.target.dataset.value || "");
+      localStorage.setItem('theme', e.target.dataset.value || '');
       updateTheme();
-      themeMenu?.classList.add("hidden");
-      themeMenu?.classList.remove("flex-col", "md:flex");
+      themeMenu?.classList.add('hidden');
+      themeMenu?.classList.remove('flex-col', 'md:flex');
     });
   });
 </script>

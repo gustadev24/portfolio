@@ -1,12 +1,11 @@
 ---
-import type { ProjectCardType } from "@types";
-import Button from "@components/ui/Button.astro";
-import LinkIcon from "@assets/icons/link.svg";
-import GithubIcon from "@assets/icons/github.svg";
-import NewTabIcon from "@assets/icons/new-tab.svg";
-import { Image } from "astro:assets";
-import Tag from "./Tag.astro";
-import { getI18n, Locale } from "@i18n/index";
+import type { ProjectCardType } from '@/types';
+import Button from '@/components/ui/Button.astro';
+import LinkIcon from '@/assets/icons/link.svg';
+import GithubIcon from '@/assets/icons/github.svg';
+import { Image } from 'astro:assets';
+import Tag from './Tag.astro';
+import { getI18n, Locale } from '@/i18n/index';
 
 const { currentLocale } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
@@ -16,16 +15,24 @@ type Props = ProjectCardType;
 const { img, title, tags, description, github, preview } = Astro.props;
 ---
 
-<article class="flex flex-col p-6 justify-between gap-10 bg-secondary/15 rounded-2xl shadow-container shadow-secondary/50">
+<article
+  class="flex flex-col p-6 justify-between gap-10 bg-secondary/15 rounded-2xl shadow-container shadow-secondary/50"
+>
   <div class="flex flex-col gap-6">
-      <Image src={img} alt={title} class="h-60 object-cover transition-transform rounded-2xl project-card-image" />
+    <Image
+      src={img}
+      alt={title}
+      class="h-60 object-cover transition-transform rounded-2xl project-card-image"
+    />
     <div class="flex flex-col gap-4">
-      <h3 class="text-3xl text-primary-foreground font-primary font-medium">{title}</h3>
+      <h3 class="text-3xl text-primary-foreground font-primary font-medium">
+        {title}
+      </h3>
       <div class="flex flex-wrap gap-x-2 gap-y-1">
         {
           tags.map(({ icon: Icon, content, class: className, iconClass }) => (
             <Tag class={className}>
-              {Icon && <Icon slot="icon" class:list={["w-4", iconClass]} />}
+              {Icon && <Icon slot="icon" class:list={['w-4', iconClass]} />}
               {content}
             </Tag>
           ))
@@ -38,22 +45,30 @@ const { img, title, tags, description, github, preview } = Astro.props;
     {
       preview && (
         <Button as="a" href={preview} class="py-2">
-          <LinkIcon slot="icon" class="w-5 stroke-button-foreground group-hover:stroke-accent" />
+          <LinkIcon
+            slot="icon"
+            class="w-5 stroke-button-foreground group-hover:stroke-accent"
+          />
           {i18n.PROJECTS.CARD.PREVIEW}
         </Button>
       )
     }
     <Button as="a" href={github} class="py-2">
-      <GithubIcon slot="icon" class="w-5 fill-button-foreground group-hover:fill-accent" />
+      <GithubIcon
+        slot="icon"
+        class="w-5 fill-button-foreground group-hover:fill-accent"
+      />
       {i18n.PROJECTS.CARD.SOURCE_CODE}
     </Button>
   </div>
 </article>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
+  document.addEventListener('astro:page-load', () => {
     // Interactive tilt effect
-    const images = document.getElementsByClassName('project-card-image') as HTMLCollectionOf<HTMLImageElement>;
+    const images = document.getElementsByClassName(
+      'project-card-image',
+    ) as HTMLCollectionOf<HTMLImageElement>;
 
     if (images) {
       Array.from(images).forEach((img) => {
@@ -73,7 +88,8 @@ const { img, title, tags, description, github, preview } = Astro.props;
         });
 
         img.addEventListener('mouseleave', () => {
-          img.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+          img.style.transform =
+            'perspective(1200px) rotateX(0deg) rotateY(0deg)';
         });
       });
     }

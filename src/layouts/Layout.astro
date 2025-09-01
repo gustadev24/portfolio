@@ -1,12 +1,12 @@
 ---
-import  "@styles/global.css";
-import "@fontsource-variable/figtree";
-import "@fontsource-variable/fredoka";
-import { ClientRouter } from "astro:transitions";
+import '@/styles/global.css';
+import '@fontsource-variable/figtree';
+import '@fontsource-variable/fredoka';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
-	title: string;
-	description: string;
+  title: string;
+  description: string;
 }
 
 const { currentLocale } = Astro;
@@ -15,26 +15,29 @@ const { title, description } = Astro.props;
 
 <!doctype html>
 <html lang={currentLocale} class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="description" content={description} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<title>{title}</title>
-		<ClientRouter />
-	</head>
-	<body class="flex flex-col items-center text-secondary-foreground">
-		<div class="fixed min-h-screen w-full -z-10 top-0 bg-white dark:bg-black bg-linear-to-b from-65% from-primary/40 to-95% to-secondary/30" /> 
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body class="flex flex-col items-center text-secondary-foreground">
+    <div
+      class="fixed min-h-screen w-full -z-10 top-0 bg-white dark:bg-black bg-linear-to-b from-65% from-primary/40 to-95% to-secondary/30"
+    >
+    </div>
+    <slot />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		color-scheme: light dark;
-		margin: 0;
-		width: 100%;
-		min-height: 100%;
-	}
+  html,
+  body {
+    color-scheme: light dark;
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+  }
 </style>

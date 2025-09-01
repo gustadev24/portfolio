@@ -1,6 +1,6 @@
 ---
-import { cn } from '@lib/utils';
-import type { HTMLAttributes } from 'astro/types'
+import { cn } from '@/lib/utils';
+import type { HTMLAttributes } from 'astro/types';
 
 type Props = HTMLAttributes<'li'>;
 
@@ -8,7 +8,10 @@ const { class: className, ...rest } = Astro.props;
 ---
 
 <li
-  class={cn("flex gap-2 stroke-navbar-foreground items-center hover:text-accent hover:stroke-accent hover:bg-radial hover:from-accent/15 hover:to-transparent hover:to-70% transition-colors hover:cursor-pointer group", className)}
+  class={cn(
+    'flex gap-2 stroke-navbar-foreground items-center hover:text-accent hover:stroke-accent hover:bg-radial hover:from-accent/15 hover:to-transparent hover:to-70% transition-colors hover:cursor-pointer group',
+    className,
+  )}
   {...rest}
 >
   <slot />

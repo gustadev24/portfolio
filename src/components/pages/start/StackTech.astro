@@ -1,65 +1,64 @@
 ---
-import Section from "@components/ui/Section.astro";
-import type { TechType } from "@types";
-import Title from "@components/ui/Title.astro";
-import StackIcon from "@assets/icons/stack.svg";
-import TailwindLogo from "@assets/icons/tailwindcss.svg";
-import NextJSLogo from "@assets/icons/nextjs.svg";
-import ReactLogo from "@assets/icons/react.svg";
-import MotionLogo from "@assets/icons/motion.svg";
-import UnityLogo from "@assets/icons/unity.svg";
-import SupabaseLogo from "@assets/icons/supabase.svg";
-import VercelLogo from "@assets/icons/vercel.svg";
-import AstroLogo from "@assets/icons/astro.svg";
-import { RootSections } from "@config/pages";
-import TechItem from "./TechItem.astro";
-import { DEFAULT_LOCALE, getI18n, Locale } from "@i18n/index";
+import Section from '@/components/ui/Section.astro';
+import type { TechType } from '@/types';
+import Title from '@/components/ui/Title.astro';
+import StackIcon from '@/assets/icons/stack.svg';
+import TailwindLogo from '@/assets/icons/tailwindcss.svg';
+import NextJSLogo from '@/assets/icons/nextjs.svg';
+import ReactLogo from '@/assets/icons/react.svg';
+import MotionLogo from '@/assets/icons/motion.svg';
+import UnityLogo from '@/assets/icons/unity.svg';
+import SupabaseLogo from '@/assets/icons/supabase.svg';
+import VercelLogo from '@/assets/icons/vercel.svg';
+import AstroLogo from '@/assets/icons/astro.svg';
+import { RootSections } from '@/config/pages';
+import TechItem from './TechItem.astro';
+import { DEFAULT_LOCALE, getI18n, Locale } from '@/i18n/index';
 
 const { currentLocale = DEFAULT_LOCALE } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
 
 const techs: TechType[] = [
   {
-    content: "Tailwind CSS",
-    class: "bg-[#003159]",
+    content: 'Tailwind CSS',
+    class: 'bg-[#003159]',
     icon: TailwindLogo,
   },
   {
-    content: "Next JS",
-    class: "bg-black",
+    content: 'Next JS',
+    class: 'bg-black',
     icon: NextJSLogo,
   },
   {
-    content: "React",
-    class: "bg-[#23272F]",
+    content: 'React',
+    class: 'bg-[#23272F]',
     icon: ReactLogo,
   },
   {
-    content: "Motion",
-    class: "bg-[#1A202C]",
+    content: 'Motion',
+    class: 'bg-[#1A202C]',
     icon: MotionLogo,
   },
   {
-    content: "Unity",
-    class: "bg-black",
+    content: 'Unity',
+    class: 'bg-black',
     icon: UnityLogo,
   },
   {
-    content: "Supabase",
-    class: "bg-[#1A202C]",
+    content: 'Supabase',
+    class: 'bg-[#1A202C]',
     icon: SupabaseLogo,
   },
   {
-    content: "Vercel",
-    class: "bg-black",
+    content: 'Vercel',
+    class: 'bg-black',
     icon: VercelLogo,
   },
   {
-    content: "Astro",
-    class: "bg-black",
+    content: 'Astro',
+    class: 'bg-black',
     icon: AstroLogo,
-  }
-
+  },
 ];
 ---
 
@@ -70,12 +69,11 @@ const techs: TechType[] = [
   </Title>
   <div class="flex flex-wrap gap-x-8 gap-y-16 justify-center">
     {
-      techs.map(({ content, class: className, icon: Icon, iconClass}) => (
+      techs.map(({ content, class: className, icon: Icon, iconClass }) => (
         <TechItem info={content} class={className}>
-          <Icon class:list={["size-full", iconClass]} />
+          <Icon class:list={['size-full', iconClass]} />
         </TechItem>
       ))
     }
   </div>
-
 </Section>

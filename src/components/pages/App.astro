@@ -1,22 +1,19 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import Hero from '@components/pages/start/Hero.astro';
-import NavBar from '@components/layout/nav/NavBar.astro';
-import Projects from '@components/pages/start/Projects.astro';
-import About from '@components/pages/start/About.astro';
-import Footer from '@components/pages/start/Footer.astro';
+import Layout from '@/layouts/Layout.astro';
+import Hero from '@/components/pages/start/Hero.astro';
+import NavBar from '@/components/layout/nav/NavBar.astro';
+import Projects from '@/components/pages/start/Projects.astro';
+import About from '@/components/pages/start/About.astro';
+import Footer from '@/components/pages/start/Footer.astro';
 import StackTech from './start/StackTech.astro';
 import HeroMobile from './start/HeroMobile.astro';
-import { getI18n, Locale } from '@i18n/index';
+import { getI18n, Locale } from '@/i18n/index';
 
 const { currentLocale } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
 ---
 
-<Layout
-  title={i18n.SEO_TITLE}
-  description={i18n.SEO_DESCRIPTION}
->
+<Layout title={i18n.SEO_TITLE} description={i18n.SEO_DESCRIPTION}>
   <Hero />
   <HeroMobile />
   <NavBar />

@@ -1,17 +1,17 @@
 ---
-import Section from "@components/ui/Section.astro";
-import Title from "@components/ui/Title.astro";
-import PersonIcon from "@assets/icons/person.svg";
-import { RootSections } from "@config/pages";
-import AboutImage from "@assets/images/bottom-right.webp";
-import { DEFAULT_LOCALE, getI18n, type Locale } from "@i18n/index";
-import { Image } from "astro:assets";
+import Section from '@/components/ui/Section.astro';
+import Title from '@/components/ui/Title.astro';
+import PersonIcon from '@/assets/icons/person.svg';
+import { RootSections } from '@/config/pages';
+import AboutImage from '@/assets/images/bottom-right.webp';
+import { DEFAULT_LOCALE, getI18n, type Locale } from '@/i18n/index';
+import { Image } from 'astro:assets';
 
-const { currentLocale = DEFAULT_LOCALE } = Astro;
-const i18n = getI18n({ currentLocale: currentLocale as Locale });
+const currentLocale = (Astro.currentLocale as Locale) ?? DEFAULT_LOCALE;
+const i18n = getI18n({ currentLocale: currentLocale });
 ---
 
-<Section class="flex-col" id={RootSections[currentLocale as Locale].ABOUT_ME}>
+<Section class="flex-col" id={RootSections[currentLocale].ABOUT_ME}>
   <Title>
     <PersonIcon class="size-10 stroke-primary-foreground" />
     {i18n.ABOUT.TITLE}
@@ -21,7 +21,11 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
       <p class="text-lg md:text-2xl" set:html={i18n.ABOUT.DESCRIPTION} />
     </div>
     <div class="flex-1">
-      <Image src={AboutImage} alt="Gustavo Sequeiros profile" class="rounded-xl shadow-container object-cover max-h-[450px]" />
+      <Image
+        src={AboutImage}
+        alt="Gustavo Sequeiros profile"
+        class="rounded-xl shadow-container object-cover max-h-[450px]"
+      />
     </div>
   </div>
 </Section>

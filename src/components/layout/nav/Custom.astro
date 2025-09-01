@@ -1,11 +1,11 @@
 ---
-import ChevronIcon from "@assets/icons/chevron-left.svg";
-import NavItem from "./NavItem.astro";
-import ThemeSwitcher from "./ThemeSwitcher.astro";
-import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ChevronIcon from '@/assets/icons/chevron-left.svg';
+import NavItem from '@/components/layout/nav/NavItem.astro';
+import ThemeSwitcher from './ThemeSwitcher.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 
-const changeNavbarSideId = "change-navbar-side";
-const changeNavbarSideIconId = "change-navbar-side-icon";
+const changeNavbarSideId = 'change-navbar-side';
+const changeNavbarSideIconId = 'change-navbar-side-icon';
 ---
 
 <menu
@@ -18,41 +18,36 @@ const changeNavbarSideIconId = "change-navbar-side-icon";
   </NavItem>
 </menu>
 
-<script is:inline>
-  // Script de declaraciones
-  const changeNavbarSideId = "change-navbar-side";
-  const changeNavbarSideIconId = "change-navbar-side-icon";
+<script is:inline data-astro-rerun>
+  const changeNavbarSideId = 'change-navbar-side';
+  const changeNavbarSideIconId = 'change-navbar-side-icon';
 
   let changeSideButton = document.getElementById(changeNavbarSideId);
   let changeSideIcon = document.getElementById(changeNavbarSideIconId);
 
   const getSidePreference = () => {
-    return localStorage.getItem("navbar-side") ?? "right";
+    return localStorage.getItem('navbar-side') ?? 'right';
   };
 
   const updateSideIcon = (side) => {
-    changeSideIcon.classList[side === "left" ? "add" : "remove"]("rotate-180");
+    changeSideIcon.classList[side === 'left' ? 'add' : 'remove']('rotate-180');
   };
 
   const updateSide = (init) => {
     const sidePreference = getSidePreference();
-    let changeSide = sidePreference === "left" ? "right" : "left";
+    let changeSide = sidePreference === 'left' ? 'right' : 'left';
     if (init) changeSide = sidePreference;
-    localStorage.setItem("navbar-side", changeSide);
+    localStorage.setItem('navbar-side', changeSide);
     updateSideIcon(changeSide);
     document.dispatchEvent(
-      new CustomEvent("change-navbar-side", {
+      new CustomEvent('change-navbar-side', {
         detail: changeSide,
       }),
     );
   };
-</script>
-
-<script is:inline data-astro-rerun>
-  // Los elementos del DOM necesitan ser actualizados
   changeSideButton = document.getElementById(changeNavbarSideId);
   changeSideIcon = document.getElementById(changeNavbarSideIconId);
-  changeSideButton.addEventListener("click", () => updateSide());
+  changeSideButton.addEventListener('click', () => updateSide());
 
   updateSide(true);
 </script>

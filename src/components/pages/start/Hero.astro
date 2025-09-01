@@ -1,14 +1,15 @@
 ---
-import SocialButtons from "@components/SocialButtons.astro";
-import Section from "@ui/Section.astro";
-import { Image } from "astro:assets";
-import heroImage from "@assets/images/gustadev.webp";
-import { getI18n, Locale } from "@i18n/index";
+import SocialButtons from '@/components/SocialButtons.astro';
+import Section from '@/components/ui/Section.astro';
+import { Image } from 'astro:assets';
+import heroImage from '@/assets/images/gustadev.webp';
+import { getI18n, Locale } from '@/i18n/index';
 
 const { currentLocale } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
-const heroId = "hero-section";
+const heroId = 'hero-section';
 ---
+
 <Section
   id={heroId}
   class="justify-between gap-[10%] items-center hidden md:flex"
@@ -37,14 +38,14 @@ const heroId = "hero-section";
 </Section>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const heroId = "hero-section";
+  document.addEventListener('astro:page-load', () => {
+    const heroId = 'hero-section';
     let heroContainer = document.getElementById(heroId);
 
     const callback: IntersectionObserverCallback = ([entry]) => {
       const isSticky = !entry.isIntersecting;
       document.dispatchEvent(
-        new CustomEvent("is-navbar-sticky", { detail: isSticky }),
+        new CustomEvent('is-navbar-sticky', { detail: isSticky }),
       );
     };
 
@@ -75,7 +76,8 @@ const heroId = "hero-section";
       });
 
       heroImage.addEventListener('mouseleave', () => {
-        heroImage.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        heroImage.style.transform =
+          'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
       });
     }
   });

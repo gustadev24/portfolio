@@ -1,13 +1,19 @@
 ---
-import type { HTMLAttributes } from 'astro/types'
-import { cn } from "@lib/utils"
+import type { HTMLAttributes } from 'astro/types';
+import { cn } from '@/lib/utils';
 
 type Props = HTMLAttributes<'section'>;
 
-const { class: className, ...rest } = Astro.props
+const { class: className, ...rest } = Astro.props;
 ---
 
-<section class={cn("px-6 flex my-14 md:my-28 mx-24 gap-y-14 md:gap-y-24 max-w-6xl w-full justify-center", className)} {...rest}>
+<section
+  class={cn(
+    'px-6 flex my-14 md:my-28 mx-24 gap-y-14 md:gap-y-24 max-w-6xl w-full justify-center',
+    className,
+  )}
+  {...rest}
+>
   <slot name="title" />
   <slot />
 </section>

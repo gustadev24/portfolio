@@ -1,12 +1,14 @@
 ---
-import SocialButtons from "@components/SocialButtons.astro";
-import { getI18n, Locale } from "@i18n/index";
+import SocialButtons from '@/components/SocialButtons.astro';
+import { getI18n, Locale } from '@/i18n/index';
 
 const { currentLocale } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
 ---
 
-<footer class="flex flex-col-reverse md:flex-row items-center justify-between w-full max-w-6xl mb-7 px-6 gap-y-5">
+<footer
+  class="flex flex-col-reverse md:flex-row items-center justify-between w-full max-w-6xl mb-7 px-6 gap-y-5"
+>
   <span class="text-muted text-center" set:html={i18n.FOOTER.DESCRIPTION} />
   <SocialButtons />
 </footer>
