@@ -8,7 +8,7 @@ const { class: className, ...rest } = Astro.props;
 ---
 
 <ul
-  class={cn("absolute w-max right-10 md:bottom-12 md:left-0 flex-col text-secondary-foreground p-3 bg-navbar/80 dark:text-muted ring-[1px] ring-secondary-foreground dark:ring-muted rounded-md shadow-nav backdrop-blur-md hidden animate-in h-max", className)}
+  class={cn("absolute w-max right-10 md:bottom-12 md:left-0 flex-col text-navbar-foreground p-3 bg-navbar ring-[1px] ring-navbar-foreground rounded-md shadow-nav backdrop-blur-md hidden animate-in h-max", className)}
   {...rest}
 >
   <slot />
