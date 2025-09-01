@@ -16,7 +16,4 @@ export default defineConfig({
       prefixDefaultLocale: false,
     }
   },
-  experimental: {
-    svg: true,
-  }
 });
