@@ -2,96 +2,14 @@
 import Section from "@components/ui/Section.astro";
 import Title from "@components/ui/Title.astro";
 import CodeIcon from "@assets/icons/code.svg";
-import TailwindLogo from "@assets/icons/tailwindcss.svg";
-import NextJSLogo from "@assets/icons/nextjs.svg";
-import ReactLogo from "@assets/icons/react.svg";
-import MotionLogo from "@assets/icons/motion.svg";
-import UnityLogo from "@assets/icons/unity.svg";
-import SupabaseLogo from "@assets/icons/supabase.svg";
-import VercelLogo from "@assets/icons/vercel.svg";
-import ACMProjectImage from "@assets/images/acm-project.webp";
-import ExoplanetsProjectImage from "@assets/images/exoplanets-project.webp";
-import KnowledgeWardensProjectImage from "@assets/images/knowledge-wardens-project.webp";
-import type { ProjectCardType, TagType } from "@types";
 import ProjectCard from "./ProjectCard.astro";
 import { RootSections } from "@config/pages";
 import { getI18n, Locale } from "@i18n/index";
+import { genProjects } from "@lib/projects";
 
 const { currentLocale } = Astro;
 const i18n = getI18n({ currentLocale: currentLocale as Locale });
-
-const tags = {
-  tailwind: {
-    content: "Tailwind CSS",
-    class: "bg-[#003159]",
-    icon: TailwindLogo,
-  },
-  nextjs: {
-    content: "Next JS",
-    class: "bg-black",
-    icon: NextJSLogo,
-  },
-  react: {
-    content: "React",
-    class: "bg-[#23272F]",
-    icon: ReactLogo,
-  },
-  motion: {
-    content: "Motion",
-    class: "bg-[#1A202C]",
-    icon: MotionLogo,
-  },
-  unity: {
-    content: "Unity",
-    class: "bg-black",
-    icon: UnityLogo,
-  },
-  supabase: {
-    content: "Supabase",
-    class: "bg-[#1A202C]",
-    icon: SupabaseLogo,
-  },
-  vercel: {
-    content: "Vercel",
-    class: "bg-black",
-    icon: VercelLogo,
-  },
-  frontend: {
-    content: i18n.PROJECTS.CARD.TAGS.FRONTEND,
-  },
-  backend: {
-    content: i18n.PROJECTS.CARD.TAGS.BACKEND,
-  },
-  trabajoEnEquipo: {
-    content: i18n.PROJECTS.CARD.TAGS.TEAM_WORK,
-  },
-};
-
-const projects: ProjectCardType[] = [
-  {
-    title: i18n.PROJECTS.ACM.TITLE,
-    description: i18n.PROJECTS.ACM.DESCRIPTION,
-    img: ACMProjectImage,
-    tags: [tags.nextjs, tags.react, tags.tailwind, tags.motion, tags.frontend, tags.trabajoEnEquipo],
-    github: "https://github.com/ynoacamino/student-chapter-acm-page",
-    preview: "https://acm.ynoacamino.site"
-  },
-  {
-    title: i18n.PROJECTS.EXOPLANETS.TITLE,
-    description: i18n.PROJECTS.EXOPLANETS.DESCRIPTION,
-    img: ExoplanetsProjectImage,
-    tags: [tags.unity, tags.react, tags.supabase, tags.tailwind, tags.frontend, tags.trabajoEnEquipo],
-    github: "https://github.com/christianmz565/Exoplanets",
-  },
-  {
-    title: i18n.PROJECTS.KNOWLEDGE_WARDENS.TITLE,
-    description: i18n.PROJECTS.KNOWLEDGE_WARDENS.DESCRIPTION,
-    img: KnowledgeWardensProjectImage,
-    tags: [tags.nextjs, tags.react, tags.unity, tags.vercel, tags.tailwind, tags.frontend],
-    github: "https://github.com/gustadev24/knowledge_wardens",
-    preview: "https://knowledge-wardens.vercel.app"
-  }
-];
+const projects = genProjects(i18n);
 ---
 
 <Section id={RootSections[currentLocale as Locale].PROJECTS} class="flex-col">
