@@ -16,17 +16,11 @@ type Props = ProjectCardType;
 const { img, title, tags, description, github, preview } = Astro.props;
 ---
 
-<article class="flex flex-col p-6 justify-between gap-10 bg-secondary/35 rounded-2xl shadow-container">
+<article class="flex flex-col p-6 justify-between gap-10 bg-secondary/15 rounded-2xl shadow-container shadow-secondary/50">
   <div class="flex flex-col gap-6">
-    <a href={preview || github} class="rounded-2xl overflow-clip relative group">
-      <Image src={img} alt={title} class="h-60 object-cover transition-transform group-hover:scale-110" />
-      <div class="absolute inset-0 flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 z-10 bg-radial from-[#000000cc] to-[#232323cc] transition-opacity text-md text-secondary-foreground">
-        {i18n.PROJECTS.CARD.VISIT}
-        <NewTabIcon class="size-3 fill-secondary-foreground" />
-      </div>
-    </a>
+      <Image src={img} alt={title} class="h-60 object-cover transition-transform rounded-2xl project-card-image" />
     <div class="flex flex-col gap-4">
-      <h3 class="text-3xl text-primary-foreground font-primary">{title}</h3>
+      <h3 class="text-3xl text-primary-foreground font-primary font-medium">{title}</h3>
       <div class="flex flex-wrap gap-x-2 gap-y-1">
         {
           tags.map(({ icon: Icon, content, class: className, iconClass }) => (
@@ -55,3 +49,34 @@ const { img, title, tags, description, github, preview } = Astro.props;
     </Button>
   </div>
 </article>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    // Interactive tilt effect
+    const images = document.getElementsByClassName('project-card-image');
+    
+    if (images) {
+      Array.from(images).forEach((img) => {
+        img.addEventListener('mousemove', (e) => {
+          const rect = img.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          // Calcular la posición del mouse relativa al centro
+          const mouseX = e.clientX - centerX;
+          const mouseY = e.clientY - centerY;
+
+          // Convertir a porcentajes y limitar el rango
+          const rotateX = (mouseY / rect.height) * -15;
+          const rotateY = (mouseX / rect.width) * 15;
+
+          img.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        img.addEventListener('mouseleave', () => {
+          img.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+        });
+      });
+    }
+  });
+</script>
