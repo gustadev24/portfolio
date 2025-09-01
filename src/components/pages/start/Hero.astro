@@ -29,7 +29,8 @@ const heroId = "hero-section";
     <Image
       src={heroImage}
       alt="Gustavo Sequeiros"
-      class="rounded-full aspect-square max-w-72 shadow-container"
+      class="rounded-full aspect-square max-w-72 shadow-container transform-3d transition-transform duration-100 ease-out"
+      id="hero-image"
     />
     <SocialButtons />
   </div>
@@ -48,9 +49,34 @@ const heroId = "hero-section";
     };
 
     const observer = new IntersectionObserver(callback, { threshold: 0.01 });
-    
+
     heroContainer = document.getElementById(heroId);
 
     if (heroContainer) observer.observe(heroContainer);
+
+    // Interactive tilt effect
+    const heroImage = document.getElementById('hero-image');
+
+    if (heroImage) {
+      heroImage.addEventListener('mousemove', (e) => {
+        const rect = heroImage.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        // Calcular la posición del mouse relativa al centro
+        const mouseX = e.clientX - centerX;
+        const mouseY = e.clientY - centerY;
+
+        // Convertir a porcentajes y limitar el rango
+        const rotateX = (mouseY / rect.height) * -30;
+        const rotateY = (mouseX / rect.width) * 30;
+
+        heroImage.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+      });
+
+      heroImage.addEventListener('mouseleave', () => {
+        heroImage.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
+    }
   });
 </script>
