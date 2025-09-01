@@ -18,17 +18,17 @@
 }
 
 .dark {
-  --primary: #020932;
+  --primary: #020f58;
   --primary-foreground: #FFD62C;
-  --secondary: #012754;
-  --secondary-foreground: #fff2cd;
+  --secondary: #04428e;
+  --secondary-foreground: #ffffff;
   --tertiary: #395DFF;
   --accent: #EA780E;
   --muted: #ffd69c;
-  --navbar: #1E1E2E;
   --button: #02183A;
-  --button-foreground: #95B2DC;
-  --button-hover: #492c0359;
+  --button-foreground: #0088ff;
+  --navbar: var(--button);
+  --navbar-foreground: var(--button-foreground);
 }
 
 @theme {
