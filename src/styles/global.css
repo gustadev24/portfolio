@@ -3,17 +3,17 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --primary: #F0EDFF;
-  --primary-foreground: #070975;
-  --secondary: #19284c33;
-  --secondary-foreground: #19284C;
-  --tertiary: #002BFF;
-  --accent: #D85301;
-  --muted: #5E80F0;
-  --navbar: #ECEFF8;
-  --button: #A3B5FF;
-  --button-foreground: #082863;
-  --button-hover: #fdb248b7;
+  --primary: #0380d4;
+  --primary-foreground: #e46707;
+  --secondary: #205695;
+  --secondary-foreground: #0d2b72;
+  --tertiary: #0363d0;
+  --accent: #0a6fe3;
+  --muted: #7b7b7c;
+  --button: #c9d2f7;
+  --button-foreground: #02286e;
+  --navbar: var(--button);
+  --navbar-foreground: var(--button-foreground);
   /* --background: radial-gradient(circle at top, var(--primary) 0, var(--secondary) 20%); */
 }
 
@@ -24,7 +24,7 @@
   --secondary-foreground: #fff2cd;
   --tertiary: #395DFF;
   --accent: #EA780E;
-  --muted: #578AB1;
+  --muted: #ffd69c;
   --navbar: #1E1E2E;
   --button: #02183A;
   --button-foreground: #95B2DC;
@@ -40,11 +40,12 @@
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-navbar: var(--navbar);
+  --color-navbar-foreground: var(--navbar-foreground);
   --color-button: var(--button);
   --color-button-foreground: var(--button-foreground);
   --color-button-hover: var(--button-hover);
   --shadow-nav: 0 0 20px 0 rgba(0, 0, 0, 0.3);
-  --shadow-container: -2px 4px 6px 0 rgba(0, 0, 0, 0.25);
+  --shadow-container: 0px 0px 6px 4px rgba(0, 0, 0, 0.3);
   --default-font-family: 'Figtree Variable', sans-serif;
   --font-primary: 'Fredoka Variable', sans-serif;
   --animate-in: in 0.2s ease-in-out;
