@@ -29,6 +29,14 @@
       "TITLE": "Knowledge Wardens",
       "DESCRIPTION": "Educational platform for teaching programming and technology. Developed in a team for the Midudev hackathon sponsored by vercel. I was in charge of the implementation of the interface and a bit of design. Also the integration of the game in the web application."
     },
+    "TECHART": {
+      "TITLE": "Techart Pixel Canvas",
+      "DESCRIPTION": "Web page developed for the Techart event where each registered user can paint a certain number of pixels on a board for a given time."
+    },
+    "CLASSROOM": {
+      "TITLE": "Sustainable Classrooms",
+      "DESCRIPTION": "Virtual platform for classroom management. Developed for the IEEE competition. An optimal performance with few resources was sought."
+    },
     "CARD": {
       "TAGS": {
         "FRONTEND": "Frontend",
