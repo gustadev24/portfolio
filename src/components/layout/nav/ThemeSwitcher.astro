@@ -79,9 +79,6 @@ const i18n = getI18n({ currentLocale: currentLocale as Locale });
     updateTheme();
   });
   updateTheme();
-  themeMenu = document.getElementById(themeMenuId);
-  themeButton = document.getElementById(themeButtonId);
-  matchDark = window.matchMedia('(prefers-color-scheme: dark)');
 
   // abrir y cerrar menú
   themeButton?.addEventListener('click', (e) => {
